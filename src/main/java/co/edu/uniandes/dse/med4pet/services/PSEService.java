@@ -28,7 +28,7 @@ public class PSEService
 	@Transactional
 	public PSEEntity getPSE(Long pseID) throws EntityNotFoundException
 	{
-		Optional<PSEEntity> pseEntity =pseRepository.findById(pseID);
+		Optional<PSEEntity> pseEntity = pseRepository.findById(pseID);
 		if (pseEntity.isEmpty())
 			throw new EntityNotFoundException("PSE account not found");
 		return pseEntity.get();

@@ -24,7 +24,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @DataJpaTest
 @Transactional
 @Import(PSEService.class)
-class PSEServiceTest {
+class PSEServiceTest
+{
 
 	@Autowired
 	private PSEService pseService;
