@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.uniandes.dse.med4pet.entities.PSEEntity;
 import co.edu.uniandes.dse.med4pet.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;

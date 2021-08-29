@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
-public class TarjetaCreditoEntity extends BaseEntity
+public class TarjetaCreditoEntity extends MedioDePagoEntity
 {
 	private Integer numeroTarjeta;
 	private Integer codigoSeguridad;
-	private String fechaVencimiento;
+	private Date fechaVencimiento;
 }

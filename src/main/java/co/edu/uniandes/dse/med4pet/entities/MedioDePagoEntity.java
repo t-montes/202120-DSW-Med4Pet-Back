@@ -1,16 +1,15 @@
 package co.edu.uniandes.dse.med4pet.entities;
 
 import javax.persistence.Entity;
-
-import lombok.Getter;
 import lombok.Setter;
+import lombok.Getter;
 
 @Getter
 @Setter
 @Entity
-public class PSEEntity extends MedioDePagoEntity
-{
-	private String banco;
-	private String numeroTarjeta;
+
+public abstract class MedioDePagoEntity extends BaseEntity{
+
+	private String nombre;
 	
 }
