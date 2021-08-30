@@ -1,6 +1,10 @@
 package co.edu.uniandes.dse.med4pet.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 import lombok.Setter;
 import lombok.Getter;
 
@@ -10,9 +14,52 @@ import java.util.Date;
 @Setter
 @Entity
 public class CitaEntity extends BaseEntity{
-	
+
+	//===========================================================================
+	// Atributos
+	//===========================================================================
+
+	/**
+	 * Representa la fecha en la que se ha realizado/realizará la cita.
+	 */
 	private Date fecha;
+	
+	/**
+	 * Representa el estado de la cita; este puede ser CANCELADA, REALIZADA, PENDIENTE.
+	 */
 	private EstadoCita estado;
+	
+	/**
+	 * Representa el costo que tuvo/tendrá la cita.
+	 */
 	private Double costo;
+
+	//===========================================================================
+	// Asociaciones
+	//===========================================================================
+
+	/**
+	 * Representa la lista de servicios que se brindaron en la cita.
+	 */
+	@ManyToMany
+	private ServicioEntity serviciosTomados;
+	
+	/**
+	 * Representa la agenda a la que está vinculada esta cita.
+	 */
+	@ManyToOne
+	private AgendaEntity agenda;
+	
+	/**
+	 * Representa la mascota pacinte que fue atendida durante la cita.
+	 */
+	@ManyToOne
+	private MascotaEntity paciente;
+	
+	/**
+	 * Representa el medio de pago con el que el cliente pagó/pagará esta cita.
+	 */
+	@OneToOne(mappedBy="citaAsociada")
+	private MedioDePagoEntity medioDePago;
 	
 }
