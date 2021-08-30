@@ -1,6 +1,5 @@
 package co.edu.uniandes.dse.med4pet.services;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -18,35 +17,36 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
+import co.edu.uniandes.dse.med4pet.entities.ClienteEntity;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Transactional
-@Import(MascotaService.class)
+@Import(ClienteService.class)
 
-class MascotaServiceTest {
+class ClienteServiceTest {
 	@Autowired
-	private MascotaService mascotaService;
+	private ClienteService clienteService;
 	
 	@Autowired
 	private TestEntityManager entityManager;
 	
 	private PodamFactory factory = new PodamFactoryImpl();
-	private List<MascotaEntity> mascotaList = new ArrayList<>();
+	
+	private List<ClienteEntity> clienteList = new ArrayList<>();
 	
 	private void insertData() {
         for (int i = 0; i < 3; i++) {
-        	MascotaEntity mascotaEntity = factory.manufacturePojo(MascotaEntity.class);
-                entityManager.persist(mascotaEntity);
-                mascotaList.add(mascotaEntity);
+        	ClienteEntity clienteEntity = factory.manufacturePojo(ClienteEntity.class);
+                entityManager.persist(clienteEntity);
+                clienteList.add(clienteEntity);
         }
 	}
 
 	 private void clearData() {
-         entityManager.getEntityManager().createQuery("delete from MascotaEntity").executeUpdate();
+         entityManager.getEntityManager().createQuery("delete from ClienteEntity").executeUpdate();
 	 }
 
 	@BeforeEach
@@ -56,17 +56,15 @@ class MascotaServiceTest {
 	}
 
 	@Test
-	void testGetMascotas() {
-		  List<MascotaEntity> list = mascotaService.getMascotas();
-          assertEquals(list.size(), mascotaList.size());
+	void testGetClientes() {
+		  List<ClienteEntity> list = clienteService.getClientes();
+          assertEquals(list.size(), clienteList.size());
           
-          MascotaEntity mascota1 = mascotaList.get(0);
-          MascotaEntity mascota2 = entityManager.find(MascotaEntity.class, mascota1.getId());
+          ClienteEntity cliente1 = clienteList.get(0);
+          ClienteEntity cliente2 = entityManager.find(ClienteEntity.class, cliente1.getId());
           
-          assertEquals(mascota1.getNombre(), mascota2.getNombre());
-          assertEquals(mascota1.getRaza(), mascota2.getRaza());
-          assertEquals(mascota1.getUbicacion(), mascota2.getUbicacion());
-          assertEquals(mascota1.getFechaNacimiento(), mascota2.getFechaNacimiento());
+          assertEquals(cliente1.getNombre(), cliente2.getNombre());
+          assertEquals(cliente1.getCalificacion(), cliente2.getCalificacion());
 	}
 
 }
