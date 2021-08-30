@@ -55,7 +55,7 @@ class ServicioServiceTest {
 	}
 
 	@Test
-	void testGetServicio() {
+	void testGetServicios() {
 		  List<ServicioEntity> list = servicioService.getServicios();
           assertEquals(list.size(), servicioList.size());
           
