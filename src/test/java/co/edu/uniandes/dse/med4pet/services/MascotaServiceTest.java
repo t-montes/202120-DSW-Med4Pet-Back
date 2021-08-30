@@ -56,7 +56,7 @@ class MascotaServiceTest {
 	}
 
 	@Test
-	void testGetMascota() {
+	void testGetMascotas() {
 		  List<MascotaEntity> list = mascotaService.getMascotas();
           assertEquals(list.size(), mascotaList.size());
           
