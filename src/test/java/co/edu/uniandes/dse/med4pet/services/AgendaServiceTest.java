@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
+import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -71,12 +72,11 @@ class AgendaServiceTest {
 		List<AgendaEntity> list = agendaService.getAgendas();
 		assertEquals(list.size(), agendaList.size());
 		
-		for (int i = 0; i < list.size(); i++) {
-			//Verifica que cada elemento tenga el mismo ID
-			assertEquals(list.get(i).getId(), agendaList.get(i).getId());
-			//Verifica que tenga algún elemento idéntico
-			assertEquals(list.get(i).getNumeroCitasPendientes(), agendaList.get(i).getNumeroCitasPendientes());
-		}
+        AgendaEntity agenda1 = agendaList.get(0);
+        AgendaEntity agenda2 = entityManager.find(AgendaEntity.class, agenda1.getId());
+        
+        assertEquals(agenda1.getNumeroCitasCanceladas(), agenda2.getNumeroCitasCanceladas());
+        
 	}
 
 }

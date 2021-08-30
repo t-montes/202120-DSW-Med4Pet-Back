@@ -1,5 +1,7 @@
 package co.edu.uniandes.dse.med4pet.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 
 import lombok.Getter;
@@ -13,5 +15,5 @@ public class CalificacionEntity extends BaseEntity
 {
 	private String creador;
 	private Double puntaje;
-	private String fecha;
+	private Date fecha;
 }

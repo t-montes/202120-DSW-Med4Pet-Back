@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ContactoEntity extends BaseEntity{
-	private Integer telefono;
+	private String telefono;
 	private String correo;
 	
 }

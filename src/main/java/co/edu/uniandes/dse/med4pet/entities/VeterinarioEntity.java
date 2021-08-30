@@ -15,7 +15,7 @@ public class VeterinarioEntity extends BaseEntity{
 	
 	private String nombre;
 	private String especialidad;
-	private	String experienciaPrevia;
+	private	String[] experienciaPrevia;
 	private String certificadoEntrenamiento;
 	private Double calificacion;
 	

@@ -18,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
 import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
 
 import uk.co.jemos.podam.api.PodamFactory;
@@ -71,12 +72,11 @@ class CitaServiceTest {
 		List<CitaEntity> list = citaService.getCitas();
 		assertEquals(list.size(), citaList.size());
 		
-		for (int i = 0; i < list.size(); i++) {
-			//Verifica que cada elemento tenga el mismo ID
-			assertEquals(list.get(i).getId(), citaList.get(i).getId());
-			//Verifica que tenga algun elemento idéntico
-			assertEquals(list.get(i).getFecha(), citaList.get(i).getFecha());
-		}
+		CitaEntity cita1 = citaList.get(0);
+        CitaEntity cita2 = entityManager.find(CitaEntity.class, cita1.getId());
+        
+        assertEquals(cita1.getFecha(), cita2.getFecha());
+        
 	}
 
 }

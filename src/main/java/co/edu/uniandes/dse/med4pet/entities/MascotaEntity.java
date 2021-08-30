@@ -1,5 +1,7 @@
 package co.edu.uniandes.dse.med4pet.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 
 import lombok.Getter;
@@ -13,5 +15,5 @@ public class MascotaEntity extends BaseEntity {
 	private String nombre;
 	private String raza;
 	private String ubicacion;
-	private Integer edad;
+	private Date fechaNacimiento;
 }

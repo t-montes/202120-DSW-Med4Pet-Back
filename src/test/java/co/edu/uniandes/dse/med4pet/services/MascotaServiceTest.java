@@ -66,7 +66,7 @@ class MascotaServiceTest {
           assertEquals(mascota1.getNombre(), mascota2.getNombre());
           assertEquals(mascota1.getRaza(), mascota2.getRaza());
           assertEquals(mascota1.getUbicacion(), mascota2.getUbicacion());
-          assertEquals(mascota1.getEdad(), mascota2.getEdad());
+          assertEquals(mascota1.getFechaNacimiento(), mascota2.getFechaNacimiento());
 	}
 
 }
