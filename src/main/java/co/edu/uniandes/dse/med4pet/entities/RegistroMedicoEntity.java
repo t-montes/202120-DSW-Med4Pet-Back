@@ -7,6 +7,7 @@ import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
 @Setter
@@ -28,8 +29,9 @@ public class RegistroMedicoEntity extends BaseEntity
 	/**
 	 * Representa el veterinario que posee dicho registro medico.
 	 */
+	@PodamExclude
 	@OneToOne
-	VeterinarioEntity veterinario;
+	private VeterinarioEntity veterinario;
 	
 	
 }

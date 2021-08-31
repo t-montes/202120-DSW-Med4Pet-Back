@@ -1,10 +1,13 @@
 package co.edu.uniandes.dse.med4pet.entities;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 import lombok.Getter;
 
 @Getter
@@ -41,13 +44,15 @@ public class AgendaEntity extends BaseEntity{
 	/**
 	 * Representa el cliente que posee la agenda.
 	 */
+	@PodamExclude
 	@OneToOne
 	private ClienteEntity cliente;
 	
 	/**
 	 * Representa la lista de citas que ha tomado el cliente; esta es la "agenda" como tal.
 	 */
+	@PodamExclude
 	@OneToMany(mappedBy="agenda")
-	private CitaEntity citas;
+	private Collection<CitaEntity> citas;
 	
 }

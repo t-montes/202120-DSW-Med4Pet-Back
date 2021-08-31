@@ -1,11 +1,14 @@
 package co.edu.uniandes.dse.med4pet.entities;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 import lombok.Getter;
 
 import java.util.Date;
@@ -41,24 +44,28 @@ public class CitaEntity extends BaseEntity{
 	/**
 	 * Representa la lista de servicios que se brindaron en la cita.
 	 */
+	@PodamExclude
 	@ManyToMany
-	private ServicioEntity serviciosTomados;
+	private Collection<ServicioEntity> serviciosTomados;
 	
 	/**
 	 * Representa la agenda a la que está vinculada esta cita.
 	 */
+	@PodamExclude
 	@ManyToOne
 	private AgendaEntity agenda;
 	
 	/**
 	 * Representa la mascota pacinte que fue atendida durante la cita.
 	 */
+	@PodamExclude
 	@ManyToOne
 	private MascotaEntity paciente;
 	
 	/**
 	 * Representa el medio de pago con el que el cliente pagó/pagará esta cita.
 	 */
+	@PodamExclude
 	@OneToOne(mappedBy="citaAsociada")
 	private MedioDePagoEntity medioDePago;
 	

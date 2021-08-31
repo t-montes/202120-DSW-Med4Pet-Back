@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
 @Getter
@@ -29,11 +30,13 @@ public class CalificacionEntity extends BaseEntity
 	/**
 	 * Representa el veterinario que esta siendo calificado en la calificacion.
 	 */
+	@PodamExclude
 	@ManyToOne
 	private VeterinarioEntity veterinarioCalificado;
 	/**
 	 * Representa el cliente que esta siendo calificado en la calificacion.
 	 */
+	@PodamExclude
 	@ManyToOne
 	private ClienteEntity clienteCalificado;
 	

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 import lombok.Getter;
 
 @Getter
@@ -29,12 +30,14 @@ public abstract class MedioDePagoEntity extends BaseEntity{
 	/**
 	 * Representa el cliente asociado que es el dueño de este medio de pago.
 	 */
+	@PodamExclude
 	@OneToOne
 	private ClienteEntity clienteAsociado;
 	
 	/**
 	 * Representa la cita que se pagó con este medio de pago en específico.
 	 */
+	@PodamExclude
 	@OneToOne
 	private CitaEntity citaAsociada;
 	
