@@ -1,7 +1,5 @@
 package co.edu.uniandes.dse.med4pet.entities;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -13,13 +11,33 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 public class EmpresaConvenioEntity extends BaseEntity {
+	
+	//===========================================================================
+	// Atributos
+	//===========================================================================
 
+	/**
+	 * Representa el nombre de la empresa asociada.
+	 */
 	private String nombre;
+	/**
+	 * Representa el nit propio de la empresa asociada.
+	 */
 	private String nit;
+	
+	/**
+	 * Representa el servicio que presta de la empresa asociada.
+	 */
 	private String servicio;
-	
-	
+
+	//===========================================================================
+	// Asociaciones
+	//===========================================================================
+
+	/**
+	 * Representa con contacto con el que se puede comunicar con la empresa.
+	 */	
 	@PodamExclude
 	@OneToOne(mappedBy="empresa")
-	private Collection<ContactoEntity> contacto;
+	private ContactoEntity contacto;
 }
