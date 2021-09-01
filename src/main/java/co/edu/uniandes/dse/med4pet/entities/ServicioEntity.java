@@ -15,14 +15,30 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Setter
 public class ServicioEntity extends BaseEntity{
 
+	//===========================================================================
+	// Atributos
+	//===========================================================================
+	
+	/**
+	 * Representa el nombre del servicio que se ofrecera.
+	 */
 	private String nombre;
 	
 	
+	//===========================================================================
+	// Asociaciones
+	//===========================================================================
+
+	/**
+	 * Representa el veteriario asignado para servicio.
+	 */
 	@PodamExclude
 	@ManyToMany
 	private Collection<VeterinarioEntity> prestadores;
 	
-	
+	/**
+	 * Representa la cita fue dada al cliente para el servicio.
+	 */
 	@PodamExclude
 	@ManyToMany(mappedBy="serviciosTomados")
 	private Collection<CitaEntity> citas;
