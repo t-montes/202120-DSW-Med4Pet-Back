@@ -1,7 +1,6 @@
 package co.edu.uniandes.dse.med4pet.entities;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -63,9 +62,9 @@ public class VeterinarioEntity extends BaseEntity{
 	/**
 	 * Representa la lista de los servicios ofrecidos por un veterinario.
 	 */
-//	@PodamExclude
-//	@ManyToMany(mappedBy="prestadores")
-//	private Collection<ServicioEntity> serviciosOfrecidos;
+	@PodamExclude
+	@ManyToMany(mappedBy="prestadores")
+	private Collection<ServicioEntity> serviciosOfrecidos;
 	/**
 	 * Representa la lista de las calificaciones de un veterinario.
 	 */
