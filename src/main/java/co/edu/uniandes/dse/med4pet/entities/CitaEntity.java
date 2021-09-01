@@ -2,6 +2,7 @@ package co.edu.uniandes.dse.med4pet.entities;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -66,7 +67,7 @@ public class CitaEntity extends BaseEntity{
 	 * Representa el medio de pago con el que el cliente pagó/pagará esta cita.
 	 */
 	@PodamExclude
-	@OneToOne(mappedBy="citaAsociada")
+	@OneToOne(mappedBy="citaAsociada", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private MedioDePagoEntity medioDePago;
 	
 }
