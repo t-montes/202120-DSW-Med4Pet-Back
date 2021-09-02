@@ -14,6 +14,10 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 public class RegistroMedicoEntity extends BaseEntity 
 {
+	//===========================================================================
+	// Atributos
+	//===========================================================================
+
 	/**
 	 * Representa la identificacion del registro medico del veterinario.
 	 */
@@ -26,6 +30,11 @@ public class RegistroMedicoEntity extends BaseEntity
 	 * Representa la ruta de acceso de la imagen del registro medico.
 	 */
 	private String imagen;
+	
+	//===========================================================================
+	// Asociaciones
+	//===========================================================================
+
 	/**
 	 * Representa el veterinario que posee dicho registro medico.
 	 */

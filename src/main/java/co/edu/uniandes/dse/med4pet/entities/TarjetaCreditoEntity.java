@@ -12,7 +12,24 @@ import java.util.Date;
 @Entity
 public class TarjetaCreditoEntity extends MedioDePagoEntity
 {
-	private Integer numeroTarjeta;
-	private Integer codigoSeguridad;
+	//===========================================================================
+	// Atributos
+	//===========================================================================
+
+	/**
+	 * Representa el número de la tarjeta con el cual se asocia el método de pago.
+	 */
+	private String numeroTarjeta;
+	
+	/**
+	 * Representa el código de seguridad de la tarjeta; permite agregar un nivel más de seguridad al pago
+	 * con tarjeta de crédito.
+	 */
+	private String codigoSeguridad;
+	
+	/**
+	 * Representa la fecha en la que vence la validez de la trajeta de crédito; permite determinar si la
+	 * tarjeta se encuentra activa.
+	 */
 	private Date fechaVencimiento;
 }

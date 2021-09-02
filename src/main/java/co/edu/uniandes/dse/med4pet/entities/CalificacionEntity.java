@@ -15,6 +15,10 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 public class CalificacionEntity extends BaseEntity
 {
+	//===========================================================================
+	// Atributos
+	//===========================================================================
+
 	/**
 	 * Representa el creador de la calificacion.
 	 */
@@ -27,6 +31,11 @@ public class CalificacionEntity extends BaseEntity
 	 * Representa la fecha de la calificacion.
 	 */
 	private Date fecha;
+	
+	//===========================================================================
+	// Asociaciones
+	//===========================================================================
+
 	/**
 	 * Representa el veterinario que esta siendo calificado en la calificacion.
 	 */
