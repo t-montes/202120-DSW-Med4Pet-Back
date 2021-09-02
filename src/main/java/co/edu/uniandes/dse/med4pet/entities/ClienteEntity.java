@@ -67,6 +67,6 @@ public class ClienteEntity extends BaseEntity {
 	 * Representa la mascota que tiene el cliente.
 	 */
 	@PodamExclude
-	@OneToMany(mappedBy="duenio", cascade=CascadeType.PERSIST, orphanRemoval=true)
+	@OneToMany(mappedBy="duenio", cascade=CascadeType.PERSIST)
 	private Collection<MascotaEntity> mascotas;
 }
