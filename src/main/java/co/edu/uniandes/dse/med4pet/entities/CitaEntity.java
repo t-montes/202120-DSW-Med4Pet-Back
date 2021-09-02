@@ -67,7 +67,7 @@ public class CitaEntity extends BaseEntity{
 	 * Representa el medio de pago con el que el cliente pagó/pagará esta cita.
 	 */
 	@PodamExclude
-	@OneToOne(mappedBy="citaAsociada", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	@OneToOne(mappedBy="citaAsociada", cascade = CascadeType.PERSIST)
 	private MedioDePagoEntity medioDePago;
 	
 }

@@ -46,7 +46,7 @@ public class ClienteEntity extends BaseEntity {
 	 * Representa la calificacion que se le da al cliente.
 	 */
 	@PodamExclude
-	@OneToMany(mappedBy="clienteCalificado")
+	@OneToMany(mappedBy="clienteCalificado", cascade=CascadeType.PERSIST, orphanRemoval=true)
 	private Collection<CalificacionEntity> calificaciones;
 	
 	/**
@@ -67,6 +67,6 @@ public class ClienteEntity extends BaseEntity {
 	 * Representa la mascota que tiene el cliente.
 	 */
 	@PodamExclude
-	@OneToMany(mappedBy="duenio" , cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy="duenio", cascade=CascadeType.PERSIST, orphanRemoval=true)
 	private Collection<MascotaEntity> mascotas;
 }
