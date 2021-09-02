@@ -69,7 +69,7 @@ public class VeterinarioEntity extends BaseEntity{
 	 * Representa la lista de las calificaciones de un veterinario.
 	 */
 	@PodamExclude
-	@OneToMany(mappedBy="veterinarioCalificado")
+	@OneToMany(mappedBy="veterinarioCalificado", cascade=CascadeType.PERSIST, orphanRemoval=true)
 	private Collection<CalificacionEntity> calificaciones;
 	
 	
