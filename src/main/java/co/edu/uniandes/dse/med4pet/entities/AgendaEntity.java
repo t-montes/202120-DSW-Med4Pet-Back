@@ -42,7 +42,16 @@ public class AgendaEntity extends BaseEntity{
 	//===========================================================================
 	
 	/**
+	 * Representa el veterinario que posee la agenda.
+	 * NOTA: El veterinario CREA citas en la agenda.
+	 */
+	@PodamExclude
+	@OneToOne
+	private VeterinarioEntity veterinario;
+	
+	/**
 	 * Representa el cliente que posee la agenda.
+	 * NOTA: Un cliente puede ASOCIAR su agenda una cita que ofrezca un veterinario.
 	 */
 	@PodamExclude
 	@OneToOne

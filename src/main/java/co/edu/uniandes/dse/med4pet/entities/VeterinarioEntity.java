@@ -46,7 +46,14 @@ public class VeterinarioEntity extends BaseEntity{
 	//===========================================================================
 	// Asociaciones
 	//===========================================================================
-
+	
+	/**
+	 * Representa la agenda con la lista de citas que ha creado el veterinario.
+	 */
+	@PodamExclude
+	@OneToOne(mappedBy="veterinario")
+	private AgendaEntity agenda;
+	
 	/**
 	 * Representa el registroMedico de un veterinario.
 	 */

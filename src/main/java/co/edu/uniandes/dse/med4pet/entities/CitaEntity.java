@@ -12,7 +12,7 @@ import lombok.Setter;
 import uk.co.jemos.podam.common.PodamExclude;
 import lombok.Getter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -24,9 +24,9 @@ public class CitaEntity extends BaseEntity{
 	//===========================================================================
 
 	/**
-	 * Representa la fecha en la que se ha realizado/realizará la cita.
+	 * Representa la fecha y la hora en la que se ha realizado/realizará la cita.
 	 */
-	private Date fecha;
+	private LocalDateTime fecha;
 	
 	/**
 	 * Representa el estado de la cita; este puede ser CANCELADA, REALIZADA, PENDIENTE.
@@ -38,6 +38,16 @@ public class CitaEntity extends BaseEntity{
 	 */
 	private Double costo;
 
+	/**
+	 * Es false si algún cliente ya agendó la cita; es true de lo contrario.
+	 */
+	private Boolean disponible;
+	
+	/**
+	 * Representa la duración (en minutos) de la cita.	
+	 */
+	private Integer duracion;
+	
 	//===========================================================================
 	// Asociaciones
 	//===========================================================================
