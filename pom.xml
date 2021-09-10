@@ -94,9 +94,6 @@
 					<execution>
 						<id>integration-tests-mascota</id>
 						<phase>integration-test</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
 						<configuration>
 							<executable>
 								newman
@@ -109,9 +106,7 @@
 					<execution>
 						<id>integration-tests-servicio</id>
 						<phase>integration-test</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
+
 						<configuration>
 							<executable>
 								newman
