@@ -46,7 +46,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>uk.co.jemos.podam</groupId>
 			<artifactId>podam</artifactId>
@@ -90,6 +90,36 @@
 						<goals>
 							<goal>stop</goal>
 						</goals>
+					</execution>
+					<execution>
+						<id>integration-tests-mascota</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/MascotaTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests-servicio</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/ServicioTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

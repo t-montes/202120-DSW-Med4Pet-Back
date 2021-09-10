@@ -15,7 +15,7 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	//OBtener todos los clientes
+	//Obtener todos los clientes
 	@Transactional
 	public List<ClienteEntity> getClientes(){
 		return clienteRepository.findAll();
