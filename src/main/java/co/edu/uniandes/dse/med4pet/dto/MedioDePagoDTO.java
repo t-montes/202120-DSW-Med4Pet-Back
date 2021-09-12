@@ -1,5 +1,10 @@
 package co.edu.uniandes.dse.med4pet.dto;
 
-public class MedioDePagoDTO {
+import lombok.Data;
 
+@Data
+public class MedioDePagoDTO {
+	
+	private String nombre;
+	
 }
