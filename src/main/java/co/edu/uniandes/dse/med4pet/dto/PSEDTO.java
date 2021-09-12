@@ -7,6 +7,6 @@ public class PSEDTO {
 	
 	private Long id;
 	private String banco;
-	private Long numeroTarjeta;
+	private String numeroTarjeta;
 
 }
