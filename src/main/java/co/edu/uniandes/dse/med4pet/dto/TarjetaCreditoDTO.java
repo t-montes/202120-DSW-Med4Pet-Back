@@ -4,11 +4,11 @@ import java.util.Date;
 
 import lombok.Data;
 
-
 @Data
-public class TarjetaCreditoDTO {
+public class TarjetaCreditoDTO{
 	
-	private Long numeroTarjeta;
+	private Long id;
+	private String numeroTarjeta;
 	private Integer codigoSeguridad;
 	private Date fechaVencimiento;
 }

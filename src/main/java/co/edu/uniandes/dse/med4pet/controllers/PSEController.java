@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.uniandes.dse.med4pet.dto.MedioDePagoDTO;
 import co.edu.uniandes.dse.med4pet.dto.PSEDTO;
 import co.edu.uniandes.dse.med4pet.entities.PSEEntity;
 import co.edu.uniandes.dse.med4pet.services.PSEService;

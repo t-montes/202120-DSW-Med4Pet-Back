@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class PSEDTO {
 	
+	private Long id;
 	private String banco;
 	private Long numeroTarjeta;
 

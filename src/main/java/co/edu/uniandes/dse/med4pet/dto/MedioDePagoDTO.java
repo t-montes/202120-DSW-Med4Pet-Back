@@ -6,5 +6,5 @@ import lombok.Data;
 public class MedioDePagoDTO {
 	
 	private String nombre;
-	
+	private Long id;
 }
