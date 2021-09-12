@@ -9,6 +9,6 @@ public class TarjetaCreditoDTO{
 	
 	private Long id;
 	private String numeroTarjeta;
-	private Integer codigoSeguridad;
+	private String codigoSeguridad;
 	private Date fechaVencimiento;
 }
