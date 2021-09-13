@@ -5,9 +5,8 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class TarjetaCreditoDTO{
+public class TarjetaCreditoDTO extends MedioDePagoDTO{
 	
-	private Long id;
 	private String numeroTarjeta;
 	private String codigoSeguridad;
 	private Date fechaVencimiento;

@@ -15,8 +15,8 @@ import co.edu.uniandes.dse.med4pet.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.dse.med4pet.services.TarjetaCreditoService;
 
 @RestController
-@RequestMapping("/TarjetaCredito")
-public class TarjetaCreditoController {
+@RequestMapping("/TarjetasCredito")
+public class TarjetaCreditoController{
 	
 	@Autowired
 	private TarjetaCreditoService tarjetaCreditoService;
