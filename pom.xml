@@ -116,6 +116,32 @@
 							</commandlineArgs>
 						</configuration>
 					</execution>
+					<execution>
+						<id>integration-tests-veterinario</id>
+						<phase>integration-test</phase>
+
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/Veterinario Test.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests-contacto</id>
+						<phase>integration-test</phase>
+
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/ContactoTest.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>

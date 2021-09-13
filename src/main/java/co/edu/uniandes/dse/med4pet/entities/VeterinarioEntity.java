@@ -78,6 +78,7 @@ public class VeterinarioEntity extends BaseEntity{
 	@PodamExclude
 	@OneToMany(mappedBy="veterinarioCalificado", cascade=CascadeType.PERSIST, orphanRemoval=true)
 	private Collection<CalificacionEntity> calificaciones;
+
 	
 	
 }

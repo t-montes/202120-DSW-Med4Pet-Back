@@ -14,7 +14,7 @@ import co.edu.uniandes.dse.med4pet.repositories.VeterinarioRepository;
 public class VeterinarioService {
 
 	@Autowired
-	VeterinarioRepository veterinarioRepository;
+	private VeterinarioRepository veterinarioRepository;
 	
 	@Transactional
 	public List<VeterinarioEntity> getVeterinarios(){
