@@ -1,28 +1,22 @@
-package co.edu.uniandes.dse.med4pet.entities;
-
-import java.util.Collection;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import lombok.Setter;
-import uk.co.jemos.podam.common.PodamExclude;
-import lombok.Getter;
+package co.edu.uniandes.dse.med4pet.dto;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@Entity
-public class CitaEntity extends BaseEntity{
+import co.edu.uniandes.dse.med4pet.entities.EstadoCita;
+import lombok.Data;
 
+@Data
+public class CitaDTO {
+	
 	//===========================================================================
 	// Atributos
 	//===========================================================================
 
+	/**
+	 * Identificador
+	 */
+	private Long id;
+	
 	/**
 	 * Representa la fecha y la hora en la que se ha realizado/realizará la cita.
 	 */
@@ -47,37 +41,18 @@ public class CitaEntity extends BaseEntity{
 	 * Representa la duración (en minutos) de la cita.	
 	 */
 	private Integer duracion;
-	
+		
 	//===========================================================================
 	// Asociaciones
 	//===========================================================================
 
 	/**
-	 * Representa la lista de servicios que se brindaron en la cita.
-	 */
-	@PodamExclude
-	@ManyToMany
-	private Collection<ServicioEntity> serviciosTomados;
-	
-	/**
-	 * Representa la agenda a la que está vinculada esta cita.
-	 */
-	@PodamExclude
-	@ManyToOne
-	private AgendaEntity agenda;
-	
-	/**
 	 * Representa la mascota paciente que fue atendida durante la cita.
 	 */
-	@PodamExclude
-	@ManyToOne
-	private MascotaEntity paciente;
+	private MascotaDTO paciente;
 	
 	/**
 	 * Representa el medio de pago con el que el cliente pagó/pagará esta cita.
 	 */
-	@PodamExclude
-	@OneToOne(mappedBy="citaAsociada", cascade = CascadeType.PERSIST)
-	private MedioDePagoEntity medioDePago;
-	
+	private MedioDePagoDTO medioDePago;
 }

@@ -58,7 +58,7 @@ public class AgendaEntity extends BaseEntity{
 	private ClienteEntity cliente;
 	
 	/**
-	 * Representa la lista de citas que ha tomado el cliente; esta es la "agenda" como tal.
+	 * Representa la lista de citas que ha tomado el cliente o veterinario; esta es la "agenda" como tal.
 	 */
 	@PodamExclude
 	@OneToMany(mappedBy="agenda")
