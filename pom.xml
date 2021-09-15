@@ -135,7 +135,7 @@
 								newman
 							</executable>
 							<commandlineArgs>
-								run collections/PSETests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+ 								run collections/PSETests.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>
@@ -159,7 +159,7 @@
 								newman
 							</executable>
 							<commandlineArgs>
-								run collections/CalificacionTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+								run collections/CalificacionTest.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>
@@ -171,7 +171,7 @@
 								newman
 							</executable>
 							<commandlineArgs>
-								run collections/RegistroMedicoTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+								run collections/RegistroMedicoTest.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>
@@ -188,26 +188,26 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>integration-tests-cita</id>
+						<id>integration-tests-cliente</id>
 						<phase>integration-test</phase>
 						<configuration>
 							<executable>
 								newman
 							</executable>
 							<commandlineArgs>
-								run collections/CitaTests.postman_collection.json -e EntornoIT.postman_environment.json
+								run collections/ClienteTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>
 					<execution>
-						<id>integration-tests-agenda</id>
+						<id>integration-tests-empresaConvenio</id>
 						<phase>integration-test</phase>
 						<configuration>
 							<executable>
 								newman
 							</executable>
 							<commandlineArgs>
-								run collections/AgendaTests.postman_collection.json -e EntornoIT.postman_environment.json
+								run collections/EmpresaConvenioTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>
