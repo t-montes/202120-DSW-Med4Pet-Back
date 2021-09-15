@@ -106,13 +106,37 @@
 					<execution>
 						<id>integration-tests-servicio</id>
 						<phase>integration-test</phase>
-
 						<configuration>
 							<executable>
 								newman
 							</executable>
 							<commandlineArgs>
 								run collections/ServicioTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests-pse</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/PSETests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests-tarjetacredito</id>
+						<phase>integration-test</phase>
+
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/TarjetaCreditoTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>

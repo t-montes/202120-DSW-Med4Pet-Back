@@ -16,8 +16,10 @@ import co.edu.uniandes.dse.med4pet.entities.PSEEntity;
 import co.edu.uniandes.dse.med4pet.services.PSEService;
 
 @RestController
-@RequestMapping("/PSE")
+@RequestMapping("/pses")
 public class PSEController {
+	
+	// Para crear los datos primero se deben crear CitaController y ClienteController
 	
 	@Autowired
 	private PSEService pseService;
