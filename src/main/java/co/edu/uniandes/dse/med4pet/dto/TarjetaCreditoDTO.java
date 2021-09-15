@@ -2,10 +2,12 @@ package co.edu.uniandes.dse.med4pet.dto;
 
 import java.util.Date;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class TarjetaCreditoDTO extends MedioDePagoDTO{
+@Getter
+@Setter
+public class TarjetaCreditoDTO extends MedioDePagoDTO {
 	
 	private String numeroTarjeta;
 	private String codigoSeguridad;

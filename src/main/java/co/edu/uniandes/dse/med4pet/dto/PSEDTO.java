@@ -1,8 +1,10 @@
 package co.edu.uniandes.dse.med4pet.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class PSEDTO extends MedioDePagoDTO{
 	
 	private String banco;

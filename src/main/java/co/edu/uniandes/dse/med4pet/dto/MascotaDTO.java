@@ -38,7 +38,7 @@ public class MascotaDTO {
 	 * Representa al cliente duenio de la mascota.
 	 */	
 
-	//private ClienteDTO duenio;
+	private ClienteDTO duenio;
 	
 	
 

@@ -3,11 +3,14 @@ package co.edu.uniandes.dse.med4pet.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
-@Data
-public class MascotaDetailDTO extends MascotaDTO{
-	//private List<CitaDTO> citasAtendidas= new ArrayList<>();
+@Getter
+@Setter
+public class MascotaDetailDTO extends MascotaDTO {
+	
+	private List<CitaDTO> citasAtendidas= new ArrayList<>();
 
 }

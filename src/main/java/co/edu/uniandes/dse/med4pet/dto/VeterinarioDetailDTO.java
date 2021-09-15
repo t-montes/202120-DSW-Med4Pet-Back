@@ -2,14 +2,17 @@ package co.edu.uniandes.dse.med4pet.dto;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class VeterinarioDetailDTO extends VeterinarioDTO {
+	
 	/**
 	 * Representa las calificaciones del veterinario.
 	 */
-//	private List<CalificacionDTO> calificaciones;
+	private List<CalificacionDTO> calificaciones;
 	/**
 	 * Representa los servicios ofrecidos por un veterinario
 	 */
