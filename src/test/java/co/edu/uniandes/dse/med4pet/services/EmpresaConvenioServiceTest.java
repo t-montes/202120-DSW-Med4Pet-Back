@@ -57,7 +57,7 @@ class EmpresaConvenioServiceTest {
 
 	@Test
 	void testGetEmpresaConvenio() {
-		  List<EmpresaConvenioEntity> list = empresaConvenioService.getEmpresasConvenio();
+		  List<EmpresaConvenioEntity> list = empresaConvenioService.getEmpresaConvenio();
           assertEquals(list.size(), empresaConvenioList.size());
           
           EmpresaConvenioEntity empresaConvenio1 = empresaConvenioList.get(0);

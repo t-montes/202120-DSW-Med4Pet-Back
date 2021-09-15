@@ -17,7 +17,7 @@ public class EmpresaConvenioService {
 	
 	//Obtener todos los clientes
 	@Transactional
-	public List<EmpresaConvenioEntity> getEmpresasConvenio(){
+	public List<EmpresaConvenioEntity> getEmpresaConvenio(){
 		return empresaConvenioRepository.findAll();
 	}
 }
