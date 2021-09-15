@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 public class CitaDetailDTO extends CitaDTO{
