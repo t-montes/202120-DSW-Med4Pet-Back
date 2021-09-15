@@ -3,11 +3,11 @@ package co.edu.uniandes.dse.med4pet.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class CitaDetailDTO extends CitaDTO{
 	
 	//===========================================================================

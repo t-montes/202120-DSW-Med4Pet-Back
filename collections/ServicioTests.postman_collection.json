@@ -15,7 +15,7 @@
 							"console.log(responseBody);\r",
 							"var data = JSON.parse(responseBody);\r",
 							"tests[\"No genera error en el Get All\"] = responseCode.code === 200;\r",
-							"tests[\"Servicios count\"] = data.length> 0;"
+							"tests[\"Servicios count\"] = data.length>= 0;"
 						],
 						"type": "text/javascript"
 					}
