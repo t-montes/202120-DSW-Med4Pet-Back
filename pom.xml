@@ -187,6 +187,30 @@
 							</commandlineArgs>
 						</configuration>
 					</execution>
+					<execution>
+						<id>integration-tests-cliente</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/ClienteTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests-empresaConvenio</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/EmpresaConvenioTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
