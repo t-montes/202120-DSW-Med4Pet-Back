@@ -25,7 +25,7 @@ public class VeterinarioDTO {
 	/**
 	 * Representa la experiencia previa del veterinario.
 	 */
-	private String[] experienciaPrevia;
+	private String experienciaPrevia;
 	/**
 	 * Representa la calificacion promedio del veterinario.
 	 */

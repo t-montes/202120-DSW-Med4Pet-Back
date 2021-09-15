@@ -125,7 +125,7 @@
 								newman
 							</executable>
 							<commandlineArgs>
-								run collections/Veterinario Test.postman_collection.json -e collections/EntornoIT.postman_environment.json
+								run collections/VeterinarioTest.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>
