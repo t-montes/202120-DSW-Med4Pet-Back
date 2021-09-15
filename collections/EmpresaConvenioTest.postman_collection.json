@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ac1c396a-29ad-4f36-b914-7e44127fb74b",
+		"_postman_id": "a587c7a3-6b28-41f2-99f0-4cf382a5c424",
 		"name": "EmpresaConvenioTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -24,7 +24,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/api/EmpresaConvenio",
+					"raw": "http://{{ip}}:{{puerto}}/api/empresasConvenio",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -32,7 +32,7 @@
 					"port": "{{puerto}}",
 					"path": [
 						"api",
-						"EmpresaConvenio"
+						"empresasConvenio"
 					]
 				}
 			},

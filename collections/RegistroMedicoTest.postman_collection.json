@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "8372d17b-d87b-4fc6-9387-b1a896c985be",
+		"_postman_id": "1e2b3aa9-59a4-41f2-a124-56171ed08e5a",
 		"name": "RegistroMedicoTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "New Request",
+			"name": "Obtener todos los registros médicos",
 			"event": [
 				{
 					"listen": "test",

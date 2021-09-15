@@ -195,7 +195,7 @@
 								newman
 							</executable>
 							<commandlineArgs>
-								run collections/ClienteTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+								run collections/ClienteTest.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>
@@ -207,7 +207,31 @@
 								newman
 							</executable>
 							<commandlineArgs>
-								run collections/EmpresaConvenioTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+								run collections/EmpresaConvenioTest.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests-cita</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/CitaTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests-agenda</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/AgendaTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>

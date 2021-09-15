@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f9604460-8a4f-4086-9680-816daa5a4663",
+		"_postman_id": "9ac55ae2-5d91-4afe-b351-a4e0d5fbc752",
 		"name": "ClienteTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -24,7 +24,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/api/Clientes",
+					"raw": "http://{{ip}}:{{puerto}}/api/clientes",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -32,7 +32,7 @@
 					"port": "{{puerto}}",
 					"path": [
 						"api",
-						"Clientes"
+						"clientes"
 					]
 				}
 			},

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "db61da72-5aa5-492c-a319-83587988e3f0",
+		"_postman_id": "a04d1e60-fdf8-4b4f-9572-8fbe4d29755b",
 		"name": "TarjetaCreditoTests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -24,7 +24,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/api/TarjetasCredito",
+					"raw": "http://{{ip}}:{{puerto}}/api/tarjetasCredito",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -32,7 +32,7 @@
 					"port": "{{puerto}}",
 					"path": [
 						"api",
-						"TarjetasCredito"
+						"tarjetasCredito"
 					]
 				}
 			},

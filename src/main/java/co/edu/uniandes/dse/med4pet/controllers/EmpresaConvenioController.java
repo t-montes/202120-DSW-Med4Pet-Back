@@ -15,7 +15,7 @@ import co.edu.uniandes.dse.med4pet.entities.EmpresaConvenioEntity;
 import co.edu.uniandes.dse.med4pet.dto.EmpresaConvenioDTO;
 
 @RestController
-@RequestMapping("/EmpresaConvenio")
+@RequestMapping("/empresasConvenio")
 public class EmpresaConvenioController {
 	
 	@Autowired

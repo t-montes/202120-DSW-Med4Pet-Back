@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "5523d07c-71ef-4167-becf-5c0d7eb58ddc",
+		"_postman_id": "a5d9fc8f-74ca-4a3c-b728-9874cd397acd",
 		"name": "CalificacionTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "New Request",
+			"name": "Obtener todas las calificaciones",
 			"event": [
 				{
 					"listen": "test",
