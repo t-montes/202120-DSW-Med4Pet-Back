@@ -116,6 +116,18 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>integration-tests-contacto</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/ContactoTest.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
 						<id>integration-tests-pse</id>
 						<phase>integration-test</phase>
 						<configuration>
@@ -128,15 +140,26 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>integration-tests-tarjetacredito</id>
+						<id>integration-tests-tarjetaCredito</id>
 						<phase>integration-test</phase>
-
 						<configuration>
 							<executable>
 								newman
 							</executable>
 							<commandlineArgs>
 								run collections/TarjetaCreditoTests.postman_collection.json -e collections/EntornoIT.postman_environment.json
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests-veterinario</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>
+								newman
+							</executable>
+							<commandlineArgs>
+								run collections/VeterinarioTest.postman_collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
 					</execution>

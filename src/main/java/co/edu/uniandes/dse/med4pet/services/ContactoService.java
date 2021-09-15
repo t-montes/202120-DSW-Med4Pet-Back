@@ -14,7 +14,7 @@ import co.edu.uniandes.dse.med4pet.repositories.ContactoRepository;
 public class ContactoService {
 
 	@Autowired
-	ContactoRepository contactoRepository;
+	private ContactoRepository contactoRepository;
 	
 	@Transactional
 	public List<ContactoEntity> getContactos(){

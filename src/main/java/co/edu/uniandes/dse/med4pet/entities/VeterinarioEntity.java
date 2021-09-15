@@ -33,7 +33,7 @@ public class VeterinarioEntity extends BaseEntity{
 	/**
 	 * Representa la experiencia de donde ha trabajado previamente un veterinario
 	 */
-	private	String[] experienciaPrevia;
+	private	String experienciaPrevia;
 	/**
 	 * Representa la ruta del archivo para el certificado de entrenamiento del veterinario
 	 */
@@ -78,6 +78,7 @@ public class VeterinarioEntity extends BaseEntity{
 	@PodamExclude
 	@OneToMany(mappedBy="veterinarioCalificado", cascade=CascadeType.PERSIST, orphanRemoval=true)
 	private Collection<CalificacionEntity> calificaciones;
+
 	
 	
 }
