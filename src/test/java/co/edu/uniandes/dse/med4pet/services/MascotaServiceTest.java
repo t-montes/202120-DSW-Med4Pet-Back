@@ -4,8 +4,12 @@ package co.edu.uniandes.dse.med4pet.services;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,9 +22,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
+import co.edu.uniandes.dse.med4pet.entities.ClienteEntity;
 import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -67,6 +75,19 @@ class MascotaServiceTest {
           assertEquals(mascota1.getRaza(), mascota2.getRaza());
           assertEquals(mascota1.getUbicacion(), mascota2.getUbicacion());
           assertEquals(mascota1.getFechaNacimiento(), mascota2.getFechaNacimiento());
+	}
+	@Test
+	void testGetMascota() throws EntityNotFoundException {
+		MascotaEntity entity = mascotaList.get(0);
+		MascotaEntity resultEntity = mascotaService.getMascota(entity.getId());
+		assertNotNull(resultEntity);
+		assertEquals(entity.getId(), resultEntity.getId());
+		assertEquals(entity.getNombre(), resultEntity.getNombre());
+		assertEquals(entity.getRaza(), resultEntity.getRaza());
+		assertEquals(entity.getUbicacion(), resultEntity.getUbicacion());
+		assertEquals(entity.getFechaNacimiento(), resultEntity.getFechaNacimiento());
+		assertEquals(entity.getDuenio(), resultEntity.getDuenio());
+		assertEquals(entity.getCitasAtendidas(), resultEntity.getCitasAtendidas());
 	}
 
 }

@@ -8,12 +8,15 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.med4pet.dto.MascotaDTO;
+import co.edu.uniandes.dse.med4pet.dto.MascotaDetailDTO;
 import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.services.MascotaService;
 
 
@@ -46,4 +49,11 @@ public class MascotaController {
                 return modelMapper.map(mascotas, new TypeToken<List<MascotaDTO>>() {
                 }.getType());
         }
+        
+        @GetMapping(value = "/{id}")
+    	@ResponseStatus(code = HttpStatus.OK)
+    	public MascotaDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    		MascotaEntity mascotaEntity = mascotaService.getMascota(id);
+    		return modelMapper.map(mascotaEntity, MascotaDetailDTO.class);
+    	}
 }

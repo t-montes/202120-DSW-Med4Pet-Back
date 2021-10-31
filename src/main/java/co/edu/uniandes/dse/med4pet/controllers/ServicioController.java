@@ -8,12 +8,17 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.uniandes.dse.med4pet.dto.MascotaDetailDTO;
 import co.edu.uniandes.dse.med4pet.dto.ServicioDTO;
+import co.edu.uniandes.dse.med4pet.dto.ServicioDetailDTO;
+import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
 import co.edu.uniandes.dse.med4pet.entities.ServicioEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.services.ServicioService;
 
 
@@ -46,4 +51,10 @@ public class ServicioController {
                 return modelMapper.map(servicios, new TypeToken<List<ServicioDTO>>() {
                 }.getType());
         }
+        @GetMapping(value = "/{id}")
+    	@ResponseStatus(code = HttpStatus.OK)
+    	public ServicioDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+        	ServicioEntity servicioEntity = servicioService.getServicio(id);
+    		return modelMapper.map(servicioEntity, ServicioDetailDTO.class);
+    	}
 }

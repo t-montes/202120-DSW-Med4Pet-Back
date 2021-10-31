@@ -3,8 +3,10 @@ package co.edu.uniandes.dse.med4pet.services;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.ManyToMany;
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,9 +19,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
+import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
 import co.edu.uniandes.dse.med4pet.entities.ServicioEntity;
+import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -63,6 +70,17 @@ class ServicioServiceTest {
           ServicioEntity servicio2 = entityManager.find(ServicioEntity.class, servicio1.getId());
           
           assertEquals(servicio1.getNombre(), servicio2.getNombre());
+	}
+
+	@Test
+	void testGetServicio() throws EntityNotFoundException {
+		ServicioEntity entity = servicioList.get(0);
+		ServicioEntity resultEntity = servicioService.getServicio(entity.getId());
+		assertNotNull(resultEntity);
+		assertEquals(entity.getId(), resultEntity.getId());
+		assertEquals(entity.getNombre(), resultEntity.getNombre());
+		assertEquals(entity.getPrestadores(), resultEntity.getPrestadores());
+		assertEquals(entity.getCitas(), resultEntity.getCitas());
 	}
 
 }
