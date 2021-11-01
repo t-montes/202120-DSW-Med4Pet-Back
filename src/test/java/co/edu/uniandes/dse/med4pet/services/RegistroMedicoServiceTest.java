@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
-
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -65,6 +65,16 @@ class RegistroMedicoServiceTest
         RegistroMedicoEntity registro1  = list.get(0);
         RegistroMedicoEntity registro2 = entityManager.find(RegistroMedicoEntity.class, registro1.getId());
         assertEquals(registro1.getIdentificacion(),registro2.getIdentificacion());
-        
-}
+	}
+	@Test
+	void TestGetRegistroMedico() throws EntityNotFoundException
+	{
+		RegistroMedicoEntity registro = registroMedicoList.get(0);
+		RegistroMedicoEntity resultEntity = registroMedicoService.getRegistroMedico(registro.getId());
+		assertNotNull(resultEntity);
+		assertEquals(registro.getId(),resultEntity.getId());
+		assertEquals(registro.getFechaExpedicion(),resultEntity.getFechaExpedicion());
+		assertEquals(registro.getIdentificacion(),resultEntity.getIdentificacion());
+		assertEquals(registro.getImagen(),resultEntity.getImagen());
+	}
 }

@@ -49,14 +49,7 @@ public class AgendaEntity extends BaseEntity{
 	@OneToOne
 	private VeterinarioEntity veterinario;
 	
-	/**
-	 * Representa el cliente que posee la agenda.
-	 * NOTA: Un cliente puede ASOCIAR su agenda una cita que ofrezca un veterinario.
-	 */
-	@PodamExclude
-	@OneToOne
-	private ClienteEntity cliente;
-	
+
 	/**
 	 * Representa la lista de citas que ha tomado el cliente o veterinario; esta es la "agenda" como tal.
 	 */

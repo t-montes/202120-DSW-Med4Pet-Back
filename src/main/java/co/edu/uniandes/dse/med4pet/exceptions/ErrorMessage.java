@@ -22,7 +22,9 @@ package co.edu.uniandes.dse.med4pet.exceptions;
 public final class ErrorMessage {
 	public static final String MASCOTA_NOT_FOUND = "La mascota con el id dado no ha sido encontrada";
 	public static final String SERVICIO_NOT_FOUND = "El servicio con el id dado no ha sido encontrado";
-
+	public static final String REGISTROMEDICO_NOT_FOUND = "El registro médico con el id dado no ha sido encontrado";
+	public static final String CALIFICACION_NOT_FOUND = "La calificación con el id dado no ha sido encontrada";
+	
 	private ErrorMessage() {
 		throw new IllegalStateException("Utility class");
 	}

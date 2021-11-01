@@ -49,13 +49,7 @@ public class ClienteEntity extends BaseEntity {
 	@OneToMany(mappedBy="clienteCalificado", cascade=CascadeType.PERSIST, orphanRemoval=true)
 	private Collection<CalificacionEntity> calificaciones;
 	
-	/**
-	 * Representa la agenda en la que esta el cliente.
-	 */
-	@PodamExclude
-	@OneToOne(mappedBy="cliente")
-	private AgendaEntity agenda;
-	
+
 	/**
 	 * Representa el medio de pago que usara el cliente para cancelar la consulta.
 	 */

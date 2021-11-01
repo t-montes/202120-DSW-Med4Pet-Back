@@ -15,7 +15,7 @@ public class AgendaDetailDTO extends AgendaDTO{
 	//===========================================================================
 	
 	/**
-	 * Representa la lista de citas que ha tomado el cliente o veterinario; esta es la "agenda" como tal.
+	 * Representa la lista de citas que ha tomado  veterinario; esta es la "agenda" como tal.
 	 */
 	private List<CitaDTO> citas = new ArrayList<>();
 	

@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.CalificacionEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -60,7 +61,7 @@ class CalificacionServiceTest {
 }
 	
 	@Test
-		void getCalificacionesTest()
+		void TestGetCalificaciones()
 		{
 			List<CalificacionEntity> List = calificacionService.getCalificaciones(); 
 			assertEquals(List.size(),calificacionList.size());
@@ -69,6 +70,17 @@ class CalificacionServiceTest {
 			assertEquals(calificacion1.getCreador(),calificacion2.getCreador());
 			
 		}
+	@Test 
+	void TestGetCalificacion() throws EntityNotFoundException
+	{
+		CalificacionEntity calificacionEntity = calificacionList.get(0);
+		CalificacionEntity resultEntity = calificacionService.getCalificacion(calificacionEntity.getId());
+		assertNotNull(resultEntity);
+		assertEquals(calificacionEntity.getId(),resultEntity.getId());
+		assertEquals(calificacionEntity.getCreador(),resultEntity.getCreador());
+		assertEquals(calificacionEntity.getFecha(),resultEntity.getFecha());
+		assertEquals(calificacionEntity.getPuntaje(),resultEntity.getPuntaje());
+	}
 }
 
 

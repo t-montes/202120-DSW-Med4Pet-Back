@@ -7,12 +7,14 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.med4pet.dto.RegistroMedicoDTO;
 import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.services.RegistroMedicoService;
 
 @RestController
@@ -32,6 +34,12 @@ public class RegistroMedicoController
 	{
 		List<RegistroMedicoEntity> registrosMedicos = registroMedicoService.getRegistrosMedicos();
 		return modelMapper.map(registrosMedicos, new TypeToken<List<RegistroMedicoDTO>>(){}.getType());
+	}
+	@GetMapping(value = "/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public RegistroMedicoDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    	RegistroMedicoEntity registroMedicoEntity = registroMedicoService.getRegistroMedico(id);
+		return modelMapper.map(registroMedicoEntity, RegistroMedicoDTO.class);
 	}
 }
 
