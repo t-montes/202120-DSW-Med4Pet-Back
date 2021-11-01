@@ -24,6 +24,8 @@ public final class ErrorMessage {
 	public static final String SERVICIO_NOT_FOUND = "El servicio con el id dado no ha sido encontrado";
 	public static final String REGISTROMEDICO_NOT_FOUND = "El registro médico con el id dado no ha sido encontrado";
 	public static final String CALIFICACION_NOT_FOUND = "La calificación con el id dado no ha sido encontrada";
+	public static final String VETERINARIO_NOT_FOUND = "El veterinario con el id dado no ha sido encontrado";
+	public static final String CONTACTO_NOT_FOUND = "El contacto con el id dado no ha sido encontrado";
 	
 	private ErrorMessage() {
 		throw new IllegalStateException("Utility class");

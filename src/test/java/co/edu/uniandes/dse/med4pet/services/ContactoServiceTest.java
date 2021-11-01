@@ -17,6 +17,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
+import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -61,6 +63,24 @@ class ContactoServiceTest {
         	assertEquals(list.get(i).getId(), contactoList.get(i).getId());
         	assertEquals(list.get(i).getTelefono(), contactoList.get(i).getTelefono());
         }
+	}
+	@Test
+	void testGetContacto() throws EntityNotFoundException{
+		ContactoEntity contactoEntity = contactoList.get(0);
+		ContactoEntity resultEntity = contactoService.getContacto(contactoEntity.getId());
+		assertNotNull(resultEntity);
+		
+		assertEquals(contactoEntity.getId(), resultEntity.getId());
+		assertEquals(contactoEntity.getCorreo(), resultEntity.getCorreo());
+		assertEquals(contactoEntity.getTelefono(), resultEntity.getTelefono());
+
+	}
+	
+	@Test
+	void testGetInvalidContacto() {
+		assertThrows(EntityNotFoundException.class, ()->{
+			contactoService.getContacto(0L);
+		});
 	}
 
 }

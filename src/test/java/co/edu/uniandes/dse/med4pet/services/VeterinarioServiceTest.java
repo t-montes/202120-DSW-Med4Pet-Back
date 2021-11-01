@@ -16,7 +16,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import co.edu.uniandes.dse.med4pet.entities.CalificacionEntity;
+import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
+import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
+import co.edu.uniandes.dse.med4pet.entities.ServicioEntity;
 import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -53,7 +58,7 @@ class VeterinarioServiceTest {
                 VeterinarioEntity veterinarioEntity = factory.manufacturePojo(VeterinarioEntity.class);
                 entityManager.persist(veterinarioEntity);
                 veterinarioList.add(veterinarioEntity);
-        }
+        }   
 	}
 	@Test
 	void testGetVeterinarios() {
@@ -63,6 +68,29 @@ class VeterinarioServiceTest {
         	assertEquals(list.get(i).getId(), veterinarioList.get(i).getId());
         	assertEquals(list.get(i).getNombre(), veterinarioList.get(i).getNombre());
         }
+	}
+	
+	@Test
+	void testGetVeterinario() throws EntityNotFoundException {
+		VeterinarioEntity veterinarioEntity = veterinarioList.get(0);
+		
+		VeterinarioEntity resultEntity = veterinarioService.getVeterinario(veterinarioEntity.getId());
+		assertNotNull(resultEntity);
+		
+		assertEquals(veterinarioEntity.getId(), resultEntity.getId());
+		assertEquals(veterinarioEntity.getNombre(), resultEntity.getNombre());
+		assertEquals(veterinarioEntity.getEspecialidad(), resultEntity.getEspecialidad());
+		assertEquals(veterinarioEntity.getExperienciaPrevia(), resultEntity.getExperienciaPrevia());
+		assertEquals(veterinarioEntity.getCertificadoEntrenamiento(), resultEntity.getCertificadoEntrenamiento());
+		assertEquals(veterinarioEntity.getCalificacion(), resultEntity.getCalificacion());
+		
+	}
+	
+	@Test
+	void testGetInvalidVeterinario() {
+		assertThrows(EntityNotFoundException.class, ()->{
+			veterinarioService.getVeterinario(0L);
+		});
 	}
 
 }
