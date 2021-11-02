@@ -15,11 +15,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import co.edu.uniandes.dse.med4pet.entities.CalificacionEntity;
-import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
-import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
-import co.edu.uniandes.dse.med4pet.entities.ServicioEntity;
 import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;

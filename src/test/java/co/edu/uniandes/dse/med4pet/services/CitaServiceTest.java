@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
-
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -71,11 +71,17 @@ class CitaServiceTest {
 		List<CitaEntity> list = citaService.getCitas();
 		assertEquals(list.size(), citaList.size());
 		
-		//CitaEntity cita1 = citaList.get(0);
-        //CitaEntity cita2 = entityManager.find(CitaEntity.class, cita1.getId());
+		CitaEntity cita1 = citaList.get(0);
+        CitaEntity cita2 = entityManager.find(CitaEntity.class, cita1.getId());
         
-        //assertEquals(cita1.getFecha(), cita2.getFecha());
-        
+        assertEquals(cita1.getFecha(), cita2.getFecha());
 	}
 
+	@Test
+	void testGetCita() throws EntityNotFoundException {
+		CitaEntity cita = citaList.get(0);
+		CitaEntity result = citaService.getCita(cita.getId());
+		assertNotNull(result);
+		assertEquals(cita.getFecha(), result.getFecha());
+	}
 }

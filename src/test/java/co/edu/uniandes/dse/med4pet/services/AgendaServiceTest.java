@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -62,7 +63,6 @@ class AgendaServiceTest {
     	}
     }
 	
-
     /**
      * Prueba que al obtener las agendas, estas son iguales.
      */
@@ -75,7 +75,13 @@ class AgendaServiceTest {
         AgendaEntity agenda2 = entityManager.find(AgendaEntity.class, agenda1.getId());
         
         assertEquals(agenda1.getNumeroCitasCanceladas(), agenda2.getNumeroCitasCanceladas());
-        
 	}
 
+	@Test
+	void testGetAgenda() throws EntityNotFoundException{
+		AgendaEntity agenda = agendaList.get(0);
+		AgendaEntity result = agendaService.getAgenda(agenda.getId());
+		assertNotNull(result);
+		assertEquals(agenda.getNumeroCitasPendientes(), result.getNumeroCitasPendientes());
+	}
 }

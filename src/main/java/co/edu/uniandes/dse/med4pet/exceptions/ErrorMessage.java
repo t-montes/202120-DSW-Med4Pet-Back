@@ -26,6 +26,8 @@ public final class ErrorMessage {
 	public static final String CALIFICACION_NOT_FOUND = "La calificación con el id dado no ha sido encontrada";
 	public static final String VETERINARIO_NOT_FOUND = "El veterinario con el id dado no ha sido encontrado";
 	public static final String CONTACTO_NOT_FOUND = "El contacto con el id dado no ha sido encontrado";
+	public static final String AGENDA_NOT_FOUND = "La agenda con el id dado no ha sido encontrada";
+	public static final String CITA_NOT_FOUND = "La cita con el id dado no ha sido encontrada";
 	
 	private ErrorMessage() {
 		throw new IllegalStateException("Utility class");

@@ -3,12 +3,10 @@ package co.edu.uniandes.dse.med4pet.services;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
 import co.edu.uniandes.dse.med4pet.entities.ServicioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
@@ -27,8 +25,6 @@ public class ServicioService {
 	public List<ServicioEntity> getServicios(){
 		return servicioRepository.findAll();
 	}
-	
-	
 	
 	@Transactional
 	public ServicioEntity getServicio(Long servicioId) throws EntityNotFoundException {
