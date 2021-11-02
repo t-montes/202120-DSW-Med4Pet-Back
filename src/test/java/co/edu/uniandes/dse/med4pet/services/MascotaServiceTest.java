@@ -4,12 +4,8 @@ package co.edu.uniandes.dse.med4pet.services;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,13 +18,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
-import co.edu.uniandes.dse.med4pet.entities.ClienteEntity;
 import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
-import uk.co.jemos.podam.common.PodamExclude;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
