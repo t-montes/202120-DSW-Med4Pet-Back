@@ -80,6 +80,7 @@ class CalificacionServiceTest {
 		assertEquals(calificacionEntity.getCreador(),resultEntity.getCreador());
 		assertEquals(calificacionEntity.getFecha(),resultEntity.getFecha());
 		assertEquals(calificacionEntity.getPuntaje(),resultEntity.getPuntaje());
+		assertEquals(calificacionEntity.getDescripcion(),resultEntity.getDescripcion());
 	}
 }
 
