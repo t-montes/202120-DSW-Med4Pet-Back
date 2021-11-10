@@ -66,7 +66,7 @@ class TarjetaCreditoServiceTest
 	}
 	
 	@Test
-	void testCreatePSE()
+	void testCreateTarjetaCredito()
 	{
 		TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
 		TarjetaCreditoEntity result = tarjetaCreditoService.createTarjetaCredito(newEntity);
@@ -81,7 +81,7 @@ class TarjetaCreditoServiceTest
 	}
 	
 	@Test
-	void testGetPSE() throws EntityNotFoundException
+	void testGetTarjetaCredito() throws EntityNotFoundException
 	{
 		TarjetaCreditoEntity tarjetaCreditoEntity = tarjetaCreditoList.get(0);
 
@@ -95,7 +95,7 @@ class TarjetaCreditoServiceTest
 	}
 	
 	@Test
-	void testGetInvalidPse() 
+	void testGetInvalidTarjetaCredito() 
 	{
 		assertThrows(EntityNotFoundException.class, ()->{
 			tarjetaCreditoService.getTarjetaCredito(0L);

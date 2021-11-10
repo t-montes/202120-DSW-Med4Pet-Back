@@ -5,12 +5,15 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import javax.transaction.Transactional;
 
 import co.edu.uniandes.dse.med4pet.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.med4pet.repositories.TarjetaCreditoRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class TarjetaCreditoService 
 {
@@ -28,9 +31,11 @@ public class TarjetaCreditoService
 	@Transactional
 	public TarjetaCreditoEntity getTarjetaCredito(Long tarjetaCreditoId) throws EntityNotFoundException
 	{
+		log.info("Inicia el proceso de consultar la tarjeta con el id = {0}", tarjetaCreditoId);
 		Optional<TarjetaCreditoEntity> tarjetaCreditoEntity = tarjetaCreditoRepository.findById(tarjetaCreditoId);
 		if (tarjetaCreditoEntity.isEmpty())
-			throw new EntityNotFoundException("Tarjeta credito not found");
+			throw new EntityNotFoundException(ErrorMessage.TARJETA_NOT_FOUND);
+		log.info("Termina el proceso de consultar la tarjeta con el id = {0}", tarjetaCreditoId);
 		return tarjetaCreditoEntity.get();
 	}
 	
