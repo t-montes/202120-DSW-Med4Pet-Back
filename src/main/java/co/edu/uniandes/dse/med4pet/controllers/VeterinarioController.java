@@ -36,9 +36,9 @@ public class VeterinarioController {
      */
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
-    public List<VeterinarioDTO> findAll() {
+    public List<VeterinarioDetailDTO> findAll() {
         List<VeterinarioEntity> vets = veterinarioService.getVeterinarios();
-        return modelMapper.map(vets, new TypeToken<List<VeterinarioDTO>>() {
+        return modelMapper.map(vets, new TypeToken<List<VeterinarioDetailDTO>>() {
         }.getType());
 	}
 	
