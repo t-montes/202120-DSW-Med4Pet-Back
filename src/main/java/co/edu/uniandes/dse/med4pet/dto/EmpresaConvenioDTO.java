@@ -27,4 +27,9 @@ public class EmpresaConvenioDTO  {
 	 * Representa el servicio que presta de la empresa asociada.
 	 */
 	private String servicio;
+	
+	/**
+	 * Representa el contacto de la empresa asociada.
+	 */
+	private ContactoDTO contacto;
 }
