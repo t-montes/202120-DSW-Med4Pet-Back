@@ -44,9 +44,9 @@ public class MascotaController {
          */
         @GetMapping
         @ResponseStatus(code = HttpStatus.OK)
-        public List<MascotaDTO> findAll() {
+        public List<MascotaDetailDTO> findAll() {
                 List<MascotaEntity> mascotas = mascotaService.getMascotas();
-                return modelMapper.map(mascotas, new TypeToken<List<MascotaDTO>>() {
+                return modelMapper.map(mascotas, new TypeToken<List<MascotaDetailDTO>>() {
                 }.getType());
         }
         
