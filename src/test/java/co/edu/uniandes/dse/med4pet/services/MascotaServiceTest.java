@@ -76,6 +76,7 @@ class MascotaServiceTest {
 		assertNotNull(resultEntity);
 		assertEquals(entity.getId(), resultEntity.getId());
 		assertEquals(entity.getNombre(), resultEntity.getNombre());
+		assertEquals(entity.getTipoMascota(), resultEntity.getTipoMascota());
 		assertEquals(entity.getRaza(), resultEntity.getRaza());
 		assertEquals(entity.getUbicacion(), resultEntity.getUbicacion());
 		assertEquals(entity.getFechaNacimiento(), resultEntity.getFechaNacimiento());

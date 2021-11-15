@@ -2,7 +2,7 @@ package co.edu.uniandes.dse.med4pet.dto;
 
 
 import java.util.Date;
-
+import co.edu.uniandes.dse.med4pet.entities.TipoMascota;
 import lombok.Data;
 
 @Data
@@ -13,6 +13,11 @@ public class MascotaDTO {
 	 * Representa el nombre de la mascota.
 	 */
 	private String nombre;
+	
+	/**
+	 * Representa si la mascota es perro, gato, hamster, ...
+	 */
+	private TipoMascota tipoMascota;
 	
 	/**
 	 * Representa el raza de la mascota.
