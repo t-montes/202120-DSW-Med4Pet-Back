@@ -42,10 +42,10 @@ public class VeterinarioDTO {
 	/**
 	 * Representa el registro medico del veterinario.
 	 */
-//	private RegistroMedicoDTO registroMedico;
+	private RegistroMedicoDTO registroMedico;
 	/**
 	 * Representa la agenda del veterinario.
 	 */
-//	private AgendaDTO agenda;
+	private AgendaDTO agenda;
 
 }
