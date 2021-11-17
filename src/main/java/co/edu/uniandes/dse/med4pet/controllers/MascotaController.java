@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.uniandes.dse.med4pet.dto.MascotaDTO;
 import co.edu.uniandes.dse.med4pet.dto.MascotaDetailDTO;
 import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
@@ -44,9 +43,9 @@ public class MascotaController {
          */
         @GetMapping
         @ResponseStatus(code = HttpStatus.OK)
-        public List<MascotaDTO> findAll() {
+        public List<MascotaDetailDTO> findAll() {
                 List<MascotaEntity> mascotas = mascotaService.getMascotas();
-                return modelMapper.map(mascotas, new TypeToken<List<MascotaDTO>>() {
+                return modelMapper.map(mascotas, new TypeToken<List<MascotaDetailDTO>>() {
                 }.getType());
         }
         

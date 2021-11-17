@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 import javax.transaction.Transactional;
 
@@ -20,6 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -90,5 +92,84 @@ class CitaServiceTest {
 		assertThrows(EntityNotFoundException.class, ()->{
 			citaService.getCita(0L);
 		});
+	}
+	
+	@Test
+	void testCreateCita() throws IllegalOperationException {
+		/*
+		CitaEntity newEntity = factory.manufacturePojo(CitaEntity.class);
+		CitaEntity result = citaService.createCita(newEntity);
+		assertNotNull(result);
+		*/
+		//Duración que no es un número entero de horas
+		assertThrows(IllegalOperationException.class, () -> {
+			CitaEntity citaTest = factory.manufacturePojo(CitaEntity.class);
+			citaTest.setFecha(LocalDateTime.of(2021, 12, 17, 10, 0, 0));
+			citaTest.setDuracion(59);
+			citaService.createCita(citaTest);
+		},
+		"La duración de la cita debe ser un múltiplo de 60");
+		
+		//Hora inicia antes de las 6am
+		assertThrows(IllegalOperationException.class, () -> {
+			CitaEntity citaTest = factory.manufacturePojo(CitaEntity.class);
+			citaTest.setFecha(LocalDateTime.of(2021, 12, 17, 5, 0, 0));
+			citaTest.setDuracion(60);
+			citaService.createCita(citaTest);
+		},
+		"La hora de inicio de la cita debe estar entre las 6am y las 8pm");
+
+		//Hora inicia después de las 8pm
+		assertThrows(IllegalOperationException.class, () -> {
+			CitaEntity citaTest = factory.manufacturePojo(CitaEntity.class);
+			citaTest.setFecha(LocalDateTime.of(2022, 12, 17, 21, 0, 0));
+			citaTest.setDuracion(60);
+			citaService.createCita(citaTest);
+		},
+		"La hora de inicio de la cita debe estar entre las 6am y las 8pm");
+		
+		//Hora finaliza después de las 9pm
+		assertThrows(IllegalOperationException.class, () -> {
+			CitaEntity citaTest = factory.manufacturePojo(CitaEntity.class);
+			citaTest.setFecha(LocalDateTime.of(2022, 12, 17, 20, 0, 0));
+			citaTest.setDuracion(120);
+			citaService.createCita(citaTest);
+		},
+		"La hora de finalización de la cita debe ser máximo a las 9pm");
+
+		//Fecha antes de la actual
+		assertThrows(IllegalOperationException.class, () -> {
+			CitaEntity citaTest = factory.manufacturePojo(CitaEntity.class);
+			citaTest.setFecha(LocalDateTime.of(2021, 5, 16, 10, 0, 0));
+			citaTest.setDuracion(60);
+			citaService.createCita(citaTest);
+		},
+		"La fecha de la cita a crear debe ser futura");
+		
+		//Fecha es un domingo
+		assertThrows(IllegalOperationException.class, () -> {
+			CitaEntity citaTest = factory.manufacturePojo(CitaEntity.class);
+			citaTest.setFecha(LocalDateTime.of(2021, 12, 12, 10, 0, 0));
+			citaTest.setDuracion(60);
+			citaService.createCita(citaTest);
+		},
+		"La fecha de la cita no puede ser un domingo");
+		
+		assertDoesNotThrow(() -> {
+			CitaEntity citaTest = factory.manufacturePojo(CitaEntity.class);
+			citaTest.setFecha(LocalDateTime.of(2021, 12, 13, 10, 0, 0));
+			citaTest.setDuracion(60);
+			citaService.createCita(citaTest);
+		});
+		
+		/*
+		CitaEntity entity = entityManager.find(CitaEntity.class, result.getId());
+		assertEquals(newEntity.getId(), entity.getId());
+		assertEquals(newEntity.getFecha(), entity.getFecha());
+		assertEquals(newEntity.getCosto(), entity.getCosto());
+		assertEquals(newEntity.getDuracion(), entity.getDuracion());
+		assertEquals(newEntity.getDisponible(), entity.getDisponible());
+		assertEquals(newEntity.getEstado(), entity.getEstado());
+		*/
 	}
 }

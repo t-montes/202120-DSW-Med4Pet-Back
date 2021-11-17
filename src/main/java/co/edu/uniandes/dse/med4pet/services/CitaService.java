@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.med4pet.repositories.CitaRepository;
 import lombok.extern.slf4j.Slf4j;
+import java.time.LocalDateTime;
+import java.time.DayOfWeek;
 
 @Slf4j
 @Service
@@ -38,5 +41,32 @@ public class CitaService {
 		}
 		log.info("Termina proceso de consultar la cita con id = {0}", citaId);
 		return citaEntity.get();
+	}
+	
+	@Transactional
+	public CitaEntity createCita(CitaEntity cita) throws IllegalOperationException{
+		log.info("Inicia proceso de creación de la cita");
+		//La duración debe ser un número entero de horas
+		if (cita.getDuracion()%60 != 0) {
+			throw new IllegalOperationException("La duración de la cita debe ser un múltiplo de 60");
+		}
+		//La cita que se crea debe ser futura
+		if (cita.getFecha().isBefore(LocalDateTime.now())) {
+			throw new IllegalOperationException("La fecha de la cita a crear debe ser futura");
+		}
+		//La hora debe empezar entre las 6am y las 8pm
+		if (cita.getFecha().getHour() > 20 || cita.getFecha().getHour() < 6) {
+			throw new IllegalOperationException("La hora de inicio de la cita debe estar entre las 6am y las 8pm");
+		}
+		//La cita debe terminar antes de las 9pm
+		if (cita.getFecha().getHour()+Math.floor(cita.getDuracion()/60) > 21) {
+			throw new IllegalOperationException("La hora de finalización de la cita debe ser máximo a las 9pm");
+		}
+		//La cita no puede ser un domingo
+		if (cita.getFecha().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+			throw new IllegalOperationException("La fecha de la cita no puede ser un domingo");
+		}
+		
+		return citaRepository.save(cita);
 	}
 }

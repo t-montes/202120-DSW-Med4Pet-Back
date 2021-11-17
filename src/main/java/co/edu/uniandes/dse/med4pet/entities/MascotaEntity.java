@@ -26,6 +26,11 @@ public class MascotaEntity extends BaseEntity {
 	private String nombre;
 	
 	/**
+	 * Representa si la mascota es un gato, perro, hamster, ...
+	 */
+	private TipoMascota tipoMascota;
+	
+	/**
 	 * Representa el raza de la mascota.
 	 */
 	private String raza;
