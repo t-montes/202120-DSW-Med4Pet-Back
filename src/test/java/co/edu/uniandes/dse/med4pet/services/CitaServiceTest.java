@@ -84,4 +84,11 @@ class CitaServiceTest {
 		assertNotNull(result);
 		assertEquals(cita.getFecha(), result.getFecha());
 	}
+	
+	@Test
+	void testGetInvalidCita() {
+		assertThrows(EntityNotFoundException.class, ()->{
+			citaService.getCita(0L);
+		});
+	}
 }

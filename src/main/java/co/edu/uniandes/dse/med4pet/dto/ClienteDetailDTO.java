@@ -10,7 +10,8 @@ import lombok.Setter;
 @Setter
 public class ClienteDetailDTO extends ClienteDTO {
 
-	private List<ClienteDTO> cliente = new ArrayList<>();
+	private List<MascotaDTO> mascotas = new ArrayList<>();
+	private List<CalificacionDTO> calificaciones = new ArrayList<>();
 	
 
 }

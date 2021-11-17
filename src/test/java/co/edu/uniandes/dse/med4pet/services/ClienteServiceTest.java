@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.ClienteEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -34,7 +35,6 @@ class ClienteServiceTest {
 	private TestEntityManager entityManager;
 	
 	private PodamFactory factory = new PodamFactoryImpl();
-	
 	private List<ClienteEntity> clienteList = new ArrayList<>();
 	
 	private void insertData() {
@@ -66,5 +66,26 @@ class ClienteServiceTest {
           assertEquals(cliente1.getNombre(), cliente2.getNombre());
           assertEquals(cliente1.getCalificacion(), cliente2.getCalificacion());
 	}
+	
+	@Test
+	void testGetCliente() throws EntityNotFoundException {
+		ClienteEntity entity = clienteList.get(0);
+		ClienteEntity resultEntity = clienteService.getCliente(entity.getId());
+		assertNotNull(resultEntity);
+		assertEquals(entity.getId(), resultEntity.getId());
+		assertEquals(entity.getNombre(), resultEntity.getNombre());
+		assertEquals(entity.getCalificaciones(), resultEntity.getCalificaciones());
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+

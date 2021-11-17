@@ -11,5 +11,5 @@ public class CalificacionDTO
 	private String creador;
 	private Date fecha;
 	private Double puntaje;
-	
+	private String descripcion;
 }

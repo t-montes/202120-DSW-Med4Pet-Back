@@ -31,6 +31,11 @@ public class CalificacionEntity extends BaseEntity
 	 * Representa la fecha de la calificacion.
 	 */
 	private Date fecha;
+	/**
+	 * Representa la descripcion de la calificacion.
+	 */
+	private String descripcion;
+	
 	
 	//===========================================================================
 	// Asociaciones

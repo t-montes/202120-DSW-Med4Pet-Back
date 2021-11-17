@@ -84,4 +84,11 @@ class AgendaServiceTest {
 		assertNotNull(result);
 		assertEquals(agenda.getNumeroCitasPendientes(), result.getNumeroCitasPendientes());
 	}
+	
+	@Test
+	void testGetInvalidAgenda() {
+		assertThrows(EntityNotFoundException.class, ()->{
+			agendaService.getAgenda(0L);
+		});
+	}
 }

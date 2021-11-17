@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.EmpresaConvenioEntity;
+import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -66,6 +67,19 @@ class EmpresaConvenioServiceTest {
           assertEquals(empresaConvenio1.getNombre(), empresaConvenio2.getNombre());
           assertEquals(empresaConvenio1.getNit(), empresaConvenio2.getNit());
           assertEquals(empresaConvenio1.getServicio(), empresaConvenio2.getServicio());
+	}
+	
+	@Test
+	void testGetEmpresaConvenios() throws EntityNotFoundException {
+		EmpresaConvenioEntity entity = empresaConvenioList.get(0);
+		EmpresaConvenioEntity resultEntity = empresaConvenioService.getEmpresaConvenio(entity.getId());
+		assertNotNull(resultEntity);
+		assertEquals(entity.getId(), resultEntity.getId());
+		assertEquals(entity.getNombre(), resultEntity.getNombre());
+		assertEquals(entity.getContacto(), resultEntity.getContacto());
+		assertEquals(entity.getNit(), resultEntity.getNit());
+		assertEquals(entity.getServicio(), resultEntity.getServicio());
+		
 	}
 
 }
