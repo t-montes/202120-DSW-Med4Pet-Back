@@ -13,5 +13,4 @@ public class VeterinarioDetailDTO extends VeterinarioDTO {
 	 * Representa las calificaciones del veterinario.
 	 */
 	private List<CalificacionDTO> calificaciones;
-
 }
