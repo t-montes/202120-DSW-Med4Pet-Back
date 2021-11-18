@@ -21,24 +21,25 @@ import co.edu.uniandes.dse.med4pet.services.CalificacionService;
 @RequestMapping("/calificaciones")
 public class CalificacionController 
 {
-		@Autowired
-		private CalificacionService calificacionService;
-		
-		@Autowired
-		private ModelMapper modelMapper;
-		
-		@GetMapping
-		@ResponseStatus(code = HttpStatus.OK)
-		public List<CalificacionDTO> findAll()
-		{
-			List<CalificacionEntity> calificaciones = calificacionService.getCalificaciones();
-			return modelMapper.map(calificaciones, new TypeToken<List<CalificacionDTO>>(){}.getType());
+	@Autowired
+	private CalificacionService calificacionService;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+	
+	@GetMapping
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<CalificacionDTO> findAll()
+	{
+		List<CalificacionEntity> calificaciones = calificacionService.getCalificaciones();
+		return modelMapper.map(calificaciones, new TypeToken<List<CalificacionDTO>>(){}.getType());
 	}
-		@GetMapping(value = "/{id}")
-    	@ResponseStatus(code = HttpStatus.OK)
-    	public CalificacionDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
-        	CalificacionEntity calificacionEntity = calificacionService.getCalificacion(id);
-    		return modelMapper.map(calificacionEntity, CalificacionDTO.class);
-    	}
+	
+	@GetMapping(value = "/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public CalificacionDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    	CalificacionEntity calificacionEntity = calificacionService.getCalificacion(id);
+		return modelMapper.map(calificacionEntity, CalificacionDTO.class);
+	}
 
 }

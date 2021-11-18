@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 public class ServicioDetailDTO extends ServicioDTO {
 	
-	private List<VeterinarioDTO> veterinarios= new ArrayList<>();
-	private List<CitaDTO> citas= new ArrayList<>();
+	private List<VeterinarioDetailDTO> prestadores = new ArrayList<>();
 
 }

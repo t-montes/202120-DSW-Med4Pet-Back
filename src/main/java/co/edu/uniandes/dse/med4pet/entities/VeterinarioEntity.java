@@ -64,7 +64,7 @@ public class VeterinarioEntity extends BaseEntity{
 	 * Representa el contacto asociado a un veterinario.
 	 */
 	@PodamExclude
-	@OneToOne(mappedBy ="veterinario")
+	@OneToOne
 	private ContactoEntity contacto;
 	/**
 	 * Representa la lista de los servicios ofrecidos por un veterinario.

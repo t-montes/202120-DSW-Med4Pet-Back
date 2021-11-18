@@ -17,6 +17,6 @@ public class CitaDetailDTO extends CitaDTO {
 	/**
 	 * Representa la lista de servicios que se brindaron en la cita.
 	 */
-	private List<ServicioDTO> serviciosTomados = new ArrayList<>();
+	private List<ServicioDetailDTO> serviciosTomados = new ArrayList<>();
 	
 }
