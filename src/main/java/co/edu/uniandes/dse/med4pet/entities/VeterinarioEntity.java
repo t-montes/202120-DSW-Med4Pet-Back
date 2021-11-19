@@ -74,6 +74,12 @@ public class VeterinarioEntity extends BaseEntity{
 	@OneToMany(mappedBy="veterinarioCalificado", cascade=CascadeType.PERSIST, orphanRemoval=true)
 	private Collection<CalificacionEntity> calificaciones;
 
+	/**
+	 * Representa la lista de los servicios ofrecidos por un veterinario.
+	 */
+	@PodamExclude
+	@ManyToMany(mappedBy="prestadores")
+	private Collection<ServicioEntity> serviciosOfrecidos;
 	
 	
 }
