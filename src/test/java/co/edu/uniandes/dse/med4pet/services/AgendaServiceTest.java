@@ -19,7 +19,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
+import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -75,6 +77,8 @@ class AgendaServiceTest {
         AgendaEntity agenda2 = entityManager.find(AgendaEntity.class, agenda1.getId());
         
         assertEquals(agenda1.getNumeroCitasCanceladas(), agenda2.getNumeroCitasCanceladas());
+        assertEquals(agenda1.getNumeroCitasPendientes(), agenda2.getNumeroCitasPendientes());
+        assertEquals(agenda1.getNumeroCitasRealizadas(), agenda2.getNumeroCitasRealizadas());
 	}
 
 	@Test
@@ -90,5 +94,84 @@ class AgendaServiceTest {
 		assertThrows(EntityNotFoundException.class, ()->{
 			agendaService.getAgenda(0L);
 		});
+	}
+	
+	@Test
+	void testCreateAgenda() throws IllegalOperationException {
+		AgendaEntity newEntity = factory.manufacturePojo(AgendaEntity.class);
+		newEntity.setNumeroCitasCanceladas(0);
+		newEntity.setNumeroCitasPendientes(0);
+		newEntity.setNumeroCitasRealizadas(0);
+		ArrayList<CitaEntity> citas = new ArrayList<CitaEntity>(); 
+		newEntity.setCitas(citas);
+		AgendaEntity result = agendaService.createAgenda(newEntity);
+		assertNotNull(result);
+		
+		AgendaEntity entity = entityManager.find(AgendaEntity.class, result.getId());
+		
+		assertEquals(newEntity.getNumeroCitasCanceladas(), entity.getNumeroCitasCanceladas());
+		assertEquals(newEntity.getNumeroCitasPendientes(), entity.getNumeroCitasPendientes());
+		assertEquals(newEntity.getNumeroCitasRealizadas(), entity.getNumeroCitasRealizadas());
+	}
+	
+	@Test
+	void testCreateAgendaConNumCanceladasInvalido() {
+		//Número de citas canceladas diferente de 0
+		assertThrows(IllegalOperationException.class, () -> {
+			AgendaEntity agendaTest = factory.manufacturePojo(AgendaEntity.class);
+			agendaTest.setNumeroCitasCanceladas(1);
+			agendaTest.setNumeroCitasPendientes(0);
+			agendaTest.setNumeroCitasRealizadas(0);
+			ArrayList<CitaEntity> citas = new ArrayList<CitaEntity>(); 
+			agendaTest.setCitas(citas);
+			agendaService.createAgenda(agendaTest);
+		},
+		"La agenda ya está inicializada; la agenda a crear debe ser nula");
+	}
+
+	@Test
+	void testCreateAgendaConNumPendientesInvalido() {
+		//Número de citas pendientes diferente de 0
+		assertThrows(IllegalOperationException.class, () -> {
+			AgendaEntity agendaTest = factory.manufacturePojo(AgendaEntity.class);
+			agendaTest.setNumeroCitasCanceladas(0);
+			agendaTest.setNumeroCitasPendientes(1);
+			agendaTest.setNumeroCitasRealizadas(0);
+			ArrayList<CitaEntity> citas = new ArrayList<CitaEntity>(); 
+			agendaTest.setCitas(citas);
+			agendaService.createAgenda(agendaTest);
+		},
+		"La agenda ya está inicializada; la agenda a crear debe ser nula");
+	}
+
+	@Test
+	void testCreateAgendaConNumRealizadasInvalido() {
+		//Número de citas realizadas diferente de 0
+		assertThrows(IllegalOperationException.class, () -> {
+			AgendaEntity agendaTest = factory.manufacturePojo(AgendaEntity.class);
+			agendaTest.setNumeroCitasCanceladas(0);
+			agendaTest.setNumeroCitasPendientes(0);
+			agendaTest.setNumeroCitasRealizadas(1);
+			ArrayList<CitaEntity> citas = new ArrayList<CitaEntity>(); 
+			agendaTest.setCitas(citas);
+			agendaService.createAgenda(agendaTest);
+		},
+		"La agenda ya está inicializada; la agenda a crear debe ser nula");
+	}
+	
+	@Test
+	void testCreateAgendaConCitasNoVacia() {
+		//Lista de citas nu vacía
+		assertThrows(IllegalOperationException.class, () -> {
+			AgendaEntity agendaTest = factory.manufacturePojo(AgendaEntity.class);
+			agendaTest.setNumeroCitasCanceladas(0);
+			agendaTest.setNumeroCitasPendientes(0);
+			agendaTest.setNumeroCitasRealizadas(0);
+			ArrayList<CitaEntity> citas = new ArrayList<CitaEntity>(); 
+			citas.add(factory.manufacturePojo(CitaEntity.class));
+			agendaTest.setCitas(citas);
+			agendaService.createAgenda(agendaTest);
+		},
+		"La agenda ya está inicializada; la agenda a crear debe ser nula");
 	}
 }

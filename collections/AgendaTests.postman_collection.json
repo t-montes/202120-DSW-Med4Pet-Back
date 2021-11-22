@@ -6,6 +6,176 @@
 	},
 	"item": [
 		{
+			"name": "Crear una agenda con número de citas canceladas no nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea con número de citas canceladas no nulo\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La agenda ya está inicializada; la agenda a crear debe ser nula\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numeroCitasPendientes\":0,\r\n    \"numeroCitasRealizadas\":0,\r\n    \"numeroCitasCanceladas\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/agendas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"agendas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una agenda con número de citas pendientes no nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea con número de citas pendientes no nulo\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La agenda ya está inicializada; la agenda a crear debe ser nula\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numeroCitasPendientes\":1,\r\n    \"numeroCitasRealizadas\":0,\r\n    \"numeroCitasCanceladas\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/agendas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"agendas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una agenda con número de citas realizados no nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea con número de citas realizadas no nulo\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La agenda ya está inicializada; la agenda a crear debe ser nula\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numeroCitasPendientes\":0,\r\n    \"numeroCitasRealizadas\":1,\r\n    \"numeroCitasCanceladas\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/agendas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"agendas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una agenda",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"new_id_a\",data.id);\r",
+							"tests[\"No genera error al crear\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numeroCitasPendientes\":0,\r\n    \"numeroCitasRealizadas\":0,\r\n    \"numeroCitasCanceladas\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/agendas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"agendas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtener todas las agendas",
 			"event": [
 				{
@@ -34,6 +204,40 @@
 					"path": [
 						"api",
 						"agendas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una agenda",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/agendas/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"agendas",
+						"{{new_id_a}}"
 					]
 				}
 			},
