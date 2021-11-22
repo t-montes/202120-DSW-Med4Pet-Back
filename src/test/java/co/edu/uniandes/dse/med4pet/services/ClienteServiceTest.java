@@ -19,6 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.ClienteEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -76,6 +77,20 @@ class ClienteServiceTest {
 		assertEquals(entity.getNombre(), resultEntity.getNombre());
 		assertEquals(entity.getCalificaciones(), resultEntity.getCalificaciones());
 	}
+	
+	@Test
+	void testCreateCliente() throws EntityNotFoundException, IllegalOperationException {
+		ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+		ClienteEntity result = clienteService.createCliente(newEntity);
+		assertNotNull(result);
+
+		ClienteEntity entity = entityManager.find(ClienteEntity.class, result.getId());
+
+		assertEquals(newEntity.getId(), entity.getId());
+		assertEquals(newEntity.getNombre(), entity.getNombre());
+		assertEquals(newEntity.getCalificacion(), entity.getCalificacion());
+	}
+
 
 }
 
