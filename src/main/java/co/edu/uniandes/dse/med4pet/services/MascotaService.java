@@ -37,4 +37,10 @@ public class MascotaService {
 		log.info("Termina proceso de consultar la mascota con id = {0}", mascotaId);
 		return mascotaEntity.get();
 	}
+	
+	@Transactional
+	public MascotaEntity createMascota(MascotaEntity mascota){
+		
+		return mascotaRepository.save(mascota);
+	}
 }

@@ -38,6 +38,335 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Obtener una cita",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/citas/{{new_id_c}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"citas",
+						"{{new_id_c}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una cita",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"new_id_c\",data.id);\r",
+							"tests[\"No genera error al crear\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha\":\"2999-12-31T06:00:00\",\r\n    \"estado\":\"PENDIENTE\",\r\n    \"costo\":100000.0,\r\n    \"disponible\":false,\r\n    \"duracion\":180\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/citas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"citas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una cita con duración inválida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea con duración de un número no entero de horas\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La duración de la cita debe ser un múltiplo de 60\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha\":\"2999-12-31T06:00:00\",\r\n    \"estado\":\"PENDIENTE\",\r\n    \"costo\":100000.0,\r\n    \"disponible\":false,\r\n    \"duracion\":179 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/citas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"citas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una cita con hora inicial antes de las 6am",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea con hora de inicio antes de las 6 am\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La hora de inicio de la cita debe estar entre las 6am y las 8pm\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha\":\"2999-12-31T05:00:00\",\r\n    \"estado\":\"PENDIENTE\",\r\n    \"costo\":100000.0,\r\n    \"disponible\":false,\r\n    \"duracion\":180 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/citas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"citas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una cita con hora inicial después de las 8pm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea con hora de inicio después de las 8 pm\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La hora de inicio de la cita debe estar entre las 6am y las 8pm\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha\":\"2999-12-31T21:00:00\",\r\n    \"estado\":\"PENDIENTE\",\r\n    \"costo\":100000.0,\r\n    \"disponible\":false,\r\n    \"duracion\":180 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/citas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"citas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una cita con hora final después de las 9pm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea con hora final después de las 9 pm\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La hora de finalización de la cita debe ser máximo a las 9pm\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha\":\"2999-12-31T20:00:00\",\r\n    \"estado\":\"PENDIENTE\",\r\n    \"costo\":100000.0,\r\n    \"disponible\":false,\r\n    \"duracion\":120 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/citas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"citas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una cita con fecha no futura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea con fecha pasada\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha de la cita a crear debe ser futura\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha\":\"2021-05-16T06:00:00\",\r\n    \"estado\":\"PENDIENTE\",\r\n    \"costo\":100000.0,\r\n    \"disponible\":false,\r\n    \"duracion\":180 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/citas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"citas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una cita con fecha no futura Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"tests[\"No crea en un domingo\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha de la cita no puede ser un domingo\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha\":\"2999-12-29T06:00:00\",\r\n    \"estado\":\"PENDIENTE\",\r\n    \"costo\":100000.0,\r\n    \"disponible\":false,\r\n    \"duracion\":180 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/citas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"citas"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
