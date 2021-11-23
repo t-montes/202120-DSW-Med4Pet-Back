@@ -6,11 +6,10 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 public class MascotaDetailDTO extends MascotaDTO {
 	
-	private List<CitaDTO> citasAtendidas= new ArrayList<>();
+	private List<CitaDetailDTO> citasAtendidas= new ArrayList<>();
 
 }

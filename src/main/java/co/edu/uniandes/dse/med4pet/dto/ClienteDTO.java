@@ -13,6 +13,7 @@ public class ClienteDTO {
 	 * Identificador
 	 */
 	private Long id;
+	
 	/**
 	 * Representa el nombre del cliente.
 	 */

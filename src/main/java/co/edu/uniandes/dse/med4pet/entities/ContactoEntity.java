@@ -31,19 +31,19 @@ public class ContactoEntity extends BaseEntity{
 	 * Representa el cliente asociado al contacto.
 	 */
 	@PodamExclude
-	@OneToOne
+	@OneToOne(mappedBy ="contacto")
 	private ClienteEntity cliente;
 	/**
 	 * Representa el veterinario asociado al contacto
 	 */
 	@PodamExclude
-	@OneToOne
+	@OneToOne(mappedBy ="contacto")
 	private VeterinarioEntity veterinario;
 	/**
 	 * Representa la empresa asociada al contacto
 	 */
 	@PodamExclude
-	@OneToOne
-	private EmpresaConvenioEntity empresa;
+	@OneToOne(mappedBy ="contacto")
+	private EmpresaConvenioEntity empresaConvenio;
 	
 }

@@ -46,6 +46,6 @@ public class VeterinarioDTO {
 	/**
 	 * Representa la agenda del veterinario.
 	 */
-	private AgendaDTO agenda;
+	private AgendaDetailDTO agenda;
 
 }

@@ -34,6 +34,10 @@ public class MascotaDTO {
 	 */
 	private Date fechaNacimiento;
 	
+	/**
+	 * Representa la edad de la mascota
+	 */
+	private int edad;
 	
 	//===========================================================================
 	// Asociaciones

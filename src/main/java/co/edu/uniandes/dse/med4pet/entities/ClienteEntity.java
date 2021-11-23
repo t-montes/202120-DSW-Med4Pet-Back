@@ -39,7 +39,7 @@ public class ClienteEntity extends BaseEntity {
 	 */	
 
 	@PodamExclude
-	@OneToOne(mappedBy="cliente")
+	@OneToOne
 	private ContactoEntity contacto;
 	
 	/**
@@ -49,7 +49,6 @@ public class ClienteEntity extends BaseEntity {
 	@OneToMany(mappedBy="clienteCalificado", cascade=CascadeType.PERSIST, orphanRemoval=true)
 	private Collection<CalificacionEntity> calificaciones;
 	
-
 	/**
 	 * Representa el medio de pago que usara el cliente para cancelar la consulta.
 	 */
