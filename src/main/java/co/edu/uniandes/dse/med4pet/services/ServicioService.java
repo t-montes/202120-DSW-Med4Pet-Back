@@ -1,6 +1,7 @@
 package co.edu.uniandes.dse.med4pet.services;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,11 @@ public class ServicioService {
 		log.info("Termina proceso de consultar el servicio con id = {0}", servicioId);
 		return servicioEntity.get();
 	}
+	
+	@Transactional
+	public ServicioEntity createServicio(ServicioEntity servicio){
+		
+		return servicioRepository.save(servicio);
+	}
+	
 }

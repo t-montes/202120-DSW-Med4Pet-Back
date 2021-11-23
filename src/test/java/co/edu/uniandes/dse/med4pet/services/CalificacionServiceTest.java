@@ -17,7 +17,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.CalificacionEntity;
+import co.edu.uniandes.dse.med4pet.entities.ClienteEntity;
+import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -39,6 +42,8 @@ class CalificacionServiceTest {
 	private PodamFactory factory = new PodamFactoryImpl();
 
     private List<CalificacionEntity> calificacionList = new ArrayList<>();
+    private List<VeterinarioEntity> veterinariosList = new ArrayList<VeterinarioEntity>();
+    private List<ClienteEntity> clientesList = new ArrayList<ClienteEntity>();
 
 	@BeforeEach
 	void setUp() throws Exception 
@@ -50,6 +55,8 @@ class CalificacionServiceTest {
 	private void clearData() 
 	{
         entityManager.getEntityManager().createQuery("delete from CalificacionEntity").executeUpdate();
+        entityManager.getEntityManager().createQuery("delete from VeterinarioEntity");
+        entityManager.getEntityManager().createQuery("delete from ClienteEntity");
 }
 	private void insertData()
 	{
@@ -58,6 +65,17 @@ class CalificacionServiceTest {
                 entityManager.persist(calificacionEntity);
                 calificacionList.add(calificacionEntity);
         }
+        for (int i = 0; i < 3; i++) {
+            VeterinarioEntity veterinarioEntity = factory.manufacturePojo(VeterinarioEntity.class);
+            entityManager.persist(veterinarioEntity);
+            veterinariosList.add(veterinarioEntity);
+    }
+        for (int i = 0; i < 3; i++) {
+            ClienteEntity clienteEntity = factory.manufacturePojo(ClienteEntity.class);
+            entityManager.persist(clienteEntity);
+            clientesList.add(clienteEntity);
+    }
+        
 }
 	
 	@Test
@@ -81,6 +99,60 @@ class CalificacionServiceTest {
 		assertEquals(calificacionEntity.getFecha(),resultEntity.getFecha());
 		assertEquals(calificacionEntity.getPuntaje(),resultEntity.getPuntaje());
 		assertEquals(calificacionEntity.getDescripcion(),resultEntity.getDescripcion());
+	}
+	@Test 
+	void TestCreateCalificacionCliente() throws IllegalOperationException
+	{
+		CalificacionEntity calificacionEntity = factory.manufacturePojo(CalificacionEntity.class);
+		calificacionEntity.setClienteCalificado(clientesList.get(0));
+		calificacionEntity.setPuntaje(4.0);
+		CalificacionEntity resultEntity = calificacionService.createCalificacion(calificacionEntity);
+		assertNotNull(resultEntity);
+
+		CalificacionEntity result = entityManager.find(CalificacionEntity.class,resultEntity.getId());
+		
+		assertEquals(calificacionEntity.getId(),result.getId());
+		assertEquals(calificacionEntity.getCreador(),result.getCreador());
+		assertEquals(calificacionEntity.getFecha(),result.getFecha());
+		assertEquals(calificacionEntity.getPuntaje(),result.getPuntaje());
+		assertEquals(calificacionEntity.getDescripcion(),result.getDescripcion());
+	}
+	@Test 
+	void TestCreateCalificacionVeterinario() throws IllegalOperationException
+	{
+		CalificacionEntity calificacionEntity = factory.manufacturePojo(CalificacionEntity.class);
+		calificacionEntity.setVeterinarioCalificado(veterinariosList.get(0));
+		calificacionEntity.setPuntaje(4.0);
+		CalificacionEntity resultEntity = calificacionService.createCalificacion(calificacionEntity);
+		assertNotNull(resultEntity);
+
+		CalificacionEntity result = entityManager.find(CalificacionEntity.class,resultEntity.getId());
+		
+		assertEquals(calificacionEntity.getId(),result.getId());
+		assertEquals(calificacionEntity.getCreador(),result.getCreador());
+		assertEquals(calificacionEntity.getFecha(),result.getFecha());
+		assertEquals(calificacionEntity.getPuntaje(),result.getPuntaje());
+		assertEquals(calificacionEntity.getDescripcion(),result.getDescripcion());
+	}
+	@Test
+	void TestCreateCalificacionPuntajeMayor()
+	{
+		assertThrows(IllegalOperationException.class, () ->{
+			CalificacionEntity calificacionEntity = factory.manufacturePojo(CalificacionEntity.class);
+			calificacionEntity.setVeterinarioCalificado(veterinariosList.get(0));
+			calificacionEntity.setPuntaje(6.3);
+			calificacionService.createCalificacion(calificacionEntity);
+		});
+	}
+	@Test
+	void TestCreateCalificacionPuntajeMenor()
+	{
+		assertThrows(IllegalOperationException.class, () ->{
+			CalificacionEntity calificacionEntity = factory.manufacturePojo(CalificacionEntity.class);
+			calificacionEntity.setVeterinarioCalificado(veterinariosList.get(0));
+			calificacionEntity.setPuntaje(-0.3);
+			calificacionService.createCalificacion(calificacionEntity);
+		});
 	}
 }
 

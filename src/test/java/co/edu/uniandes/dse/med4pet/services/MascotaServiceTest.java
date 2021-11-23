@@ -4,6 +4,7 @@ package co.edu.uniandes.dse.med4pet.services;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -19,6 +20,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
+import co.edu.uniandes.dse.med4pet.entities.TarjetaCreditoEntity;
+import co.edu.uniandes.dse.med4pet.entities.TipoMascota;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -84,5 +87,32 @@ class MascotaServiceTest {
 		assertEquals(entity.getDuenio(), resultEntity.getDuenio());
 		assertEquals(entity.getCitasAtendidas(), resultEntity.getCitasAtendidas());
 	}
+	@Test
+	void testGetInvalidMascota() {
+		assertThrows(EntityNotFoundException.class, ()->{
+			mascotaService.getMascota(0L);
+		});
+	}
+	
+	@Test
+	void testCreateMascota()
+	{
+		MascotaEntity newEntity = factory.manufacturePojo(MascotaEntity.class);
+		MascotaEntity result = mascotaService.createMascota(newEntity);
+		assertNotNull(result);
+
+		MascotaEntity entity = entityManager.find(MascotaEntity.class, result.getId());
+
+		assertEquals(newEntity.getId(), entity.getId());
+		assertEquals(newEntity.getNombre(), entity.getNombre());
+		assertEquals(newEntity.getTipoMascota(), entity.getTipoMascota());
+		assertEquals(newEntity.getRaza(), entity.getRaza());
+		assertEquals(newEntity.getUbicacion(), entity.getUbicacion());
+		assertEquals(newEntity.getFechaNacimiento(), entity.getFechaNacimiento());
+		assertEquals(newEntity.getEdad(), entity.getEdad());
+	}
+	
+	
+
 
 }

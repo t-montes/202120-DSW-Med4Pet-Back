@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
+import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -39,7 +41,9 @@ class RegistroMedicoServiceTest
 	private PodamFactory factory = new PodamFactoryImpl();
 
     private List<RegistroMedicoEntity> registroMedicoList = new ArrayList<>();
-
+    private List<VeterinarioEntity> vetList = new ArrayList<VeterinarioEntity>();
+    
+    
 	@BeforeEach
 	void setUp() throws Exception {
 		clearData();
@@ -48,6 +52,7 @@ class RegistroMedicoServiceTest
 	
 	private void clearData() {
         entityManager.getEntityManager().createQuery("delete from RegistroMedicoEntity").executeUpdate();
+        entityManager.getEntityManager().createQuery("delete from VeterinarioEntity").executeUpdate();
 }
 	private void insertData() {
         for (int i = 0; i < 3; i++) {
@@ -55,6 +60,11 @@ class RegistroMedicoServiceTest
                 entityManager.persist(registroMedicoEntity);
                 registroMedicoList.add(registroMedicoEntity);
         }
+        for (int i = 0; i < 3; i++) {
+            VeterinarioEntity vete = factory.manufacturePojo(VeterinarioEntity.class);
+            entityManager.persist(vete);
+            vetList.add(vete);
+    }
 }
 
 	@Test
@@ -76,5 +86,31 @@ class RegistroMedicoServiceTest
 		assertEquals(registro.getFechaExpedicion(),resultEntity.getFechaExpedicion());
 		assertEquals(registro.getIdentificacion(),resultEntity.getIdentificacion());
 		assertEquals(registro.getImagen(),resultEntity.getImagen());
+	}
+	@Test 
+	void TestCreateRegistroMedico() throws IllegalOperationException
+	{
+		RegistroMedicoEntity registro = factory.manufacturePojo(RegistroMedicoEntity.class);
+		registro.setVeterinario(vetList.get(0));
+		RegistroMedicoEntity resultEntity = registroMedicoService.createRegistroMedico(registro);
+		assertNotNull(resultEntity);
+		
+		RegistroMedicoEntity result = entityManager.find(RegistroMedicoEntity.class, resultEntity.getId());
+		
+		assertEquals(registro.getId(),result.getId());
+		assertEquals(registro.getFechaExpedicion(),result.getFechaExpedicion());
+		assertEquals(registro.getIdentificacion(),result.getIdentificacion());
+		assertEquals(registro.getImagen(),result.getImagen());
+	}
+	@Test
+	void TestCreateRegistroMedicoInvalidVeterinario()
+	{
+		assertThrows(IllegalOperationException.class, () -> {
+			RegistroMedicoEntity newEntity = factory.manufacturePojo(RegistroMedicoEntity.class);
+			VeterinarioEntity veterinario = new VeterinarioEntity();
+			veterinario.setId(0L);
+			newEntity.setVeterinario(veterinario);
+			registroMedicoService.createRegistroMedico(newEntity);
+		});
 	}
 }
