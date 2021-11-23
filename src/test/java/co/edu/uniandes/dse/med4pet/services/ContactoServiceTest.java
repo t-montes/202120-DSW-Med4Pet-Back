@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
+import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -81,5 +83,38 @@ class ContactoServiceTest {
 			contactoService.getContacto(0L);
 		});
 	}
+	
+	@Test
+	void testCreateContacto() throws IllegalOperationException
+	{
+		ContactoEntity newEntity = factory.manufacturePojo(ContactoEntity.class);
+		newEntity.setTelefono("+57 3103465926");
+		newEntity.setCorreo("j.marinm@uniandes.edu.co");
+		ContactoEntity result = contactoService.createContacto(newEntity);
+		assertNotNull(result);
+		
+		ContactoEntity entity = entityManager.find(ContactoEntity.class, result.getId());
+		
+		assertEquals(newEntity.getId(), entity.getId());
+		assertEquals(newEntity.getTelefono(), entity.getTelefono());
+		assertEquals(newEntity.getCorreo(), entity.getCorreo());
+	}
 
+	@Test 
+	void testCreateContactoWithWrongNumero() {
+		ContactoEntity newEntity = factory.manufacturePojo(ContactoEntity.class);
+		assertThrows(IllegalOperationException.class, ()->{
+			newEntity.setTelefono("+58 282171777");
+			contactoService.createContacto(newEntity);
+		});
+	}
+	
+	@Test 
+	void testCreateContactoWithWrongCorreo() {
+		ContactoEntity newEntity = factory.manufacturePojo(ContactoEntity.class);
+		assertThrows(IllegalOperationException.class, ()->{
+			newEntity.setTelefono("j.marinmuniandes.edu.co");
+			contactoService.createContacto(newEntity);
+		});
+	}
 }

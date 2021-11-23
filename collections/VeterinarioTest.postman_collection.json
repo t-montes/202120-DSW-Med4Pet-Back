@@ -37,6 +37,83 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Crear un veterinario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"new_id_a\",data.id);\r",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 201;\r",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"nombre\": \"Bob Esponja Pantalones Cuadrados\",\r\n        \"especialidad\": \"Especialista en Caracoles\",\r\n        \"experienciaPrevia\": \"Experiencia trabajando en CrustaceoCascarudo\",\r\n        \"certificadoEntrenamiento\": \"ADNQNZIKK2581ASN64NNNC\",\r\n        \"calificacion\": 4.5\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/veterinarios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"veterinarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un veterinario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/veterinarios/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"veterinarios",
+						"{{new_id_a}}"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

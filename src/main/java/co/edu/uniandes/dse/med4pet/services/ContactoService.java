@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
+import co.edu.uniandes.dse.med4pet.repositories.ClienteRepository;
 import co.edu.uniandes.dse.med4pet.repositories.ContactoRepository;
 
 @Service
@@ -31,4 +33,17 @@ public class ContactoService {
 			throw new EntityNotFoundException(ErrorMessage.VETERINARIO_NOT_FOUND);
 		return contactoEntity.get();
 	} 
+	
+	@Transactional
+	public ContactoEntity createContacto( ContactoEntity contacto) throws IllegalOperationException
+	{
+		if (!contacto.getCorreo().contains("@")) {
+			throw new IllegalOperationException("El correo debe tener un dominio");
+		}
+		String[] numero = contacto.getTelefono().split(" ");
+		if (!numero[0].equals("+57") || numero[1].length()!= 10) {
+			throw new IllegalOperationException("El numero de telefono no es valido");
+		}
+		return contactoRepository.save(contacto);
+	}
 }

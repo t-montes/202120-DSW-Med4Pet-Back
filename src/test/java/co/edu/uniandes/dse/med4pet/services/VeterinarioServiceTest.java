@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -87,5 +88,61 @@ class VeterinarioServiceTest {
 			veterinarioService.getVeterinario(0L);
 		});
 	}
-
+	
+	@Test
+	void testCreateVeterinario() throws IllegalOperationException
+	{
+		VeterinarioEntity newEntity = factory.manufacturePojo(VeterinarioEntity.class);
+		VeterinarioEntity result = veterinarioService.createVeterinario(newEntity);
+		assertNotNull(result);
+		
+		VeterinarioEntity entity = entityManager.find(VeterinarioEntity.class, result.getId());
+		
+		assertEquals(newEntity.getId(), entity.getId());
+		assertEquals(newEntity.getCalificacion(), entity.getCalificacion());
+		assertEquals(newEntity.getNombre(), entity.getNombre());
+		assertEquals(newEntity.getEspecialidad(), entity.getEspecialidad());
+		assertEquals(newEntity.getExperienciaPrevia(), entity.getExperienciaPrevia());
+		assertEquals(newEntity.getCertificadoEntrenamiento(), entity.getCertificadoEntrenamiento());
+	}
+	
+	@Test
+	void testCreateVeterinarioWithWrongCalification() {
+		VeterinarioEntity newEntity = factory.manufacturePojo(VeterinarioEntity.class);
+		assertThrows(IllegalOperationException.class, ()-> {
+			newEntity.setCalificacion(6.0);
+			veterinarioService.createVeterinario(newEntity);
+		});
+		assertThrows(IllegalOperationException.class, ()-> {
+			newEntity.setCalificacion(-1.0);
+			veterinarioService.createVeterinario(newEntity);
+		});
+	}
+	
+	@Test 
+	void testCreateVeterinarioWithWrongNombre() {
+		VeterinarioEntity newEntity = factory.manufacturePojo(VeterinarioEntity.class);
+		assertThrows(IllegalOperationException.class, ()->{
+			newEntity.setNombre("");
+			veterinarioService.createVeterinario(newEntity);
+		});
+	}
+	
+	@Test 
+	void testCreateVeterinarioWithWrongExperiencia() {
+		VeterinarioEntity newEntity = factory.manufacturePojo(VeterinarioEntity.class);
+		assertThrows(IllegalOperationException.class, ()->{
+			newEntity.setExperienciaPrevia("");
+			veterinarioService.createVeterinario(newEntity);
+		});
+	}
+	
+	@Test 
+	void testCreateVeterinarioWithWrongEspecialidad() {
+		VeterinarioEntity newEntity = factory.manufacturePojo(VeterinarioEntity.class);
+		assertThrows(IllegalOperationException.class, ()->{
+			newEntity.setEspecialidad("");
+			veterinarioService.createVeterinario(newEntity);
+		});
+	}
 }
