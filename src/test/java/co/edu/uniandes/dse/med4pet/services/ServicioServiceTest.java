@@ -17,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import co.edu.uniandes.dse.med4pet.entities.MascotaEntity;
 import co.edu.uniandes.dse.med4pet.entities.ServicioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -76,5 +77,25 @@ class ServicioServiceTest {
 		assertEquals(entity.getPrestadores(), resultEntity.getPrestadores());
 		assertEquals(entity.getCitas(), resultEntity.getCitas());
 	}
+	@Test
+	void testGetInvalidServicio() {
+		assertThrows(EntityNotFoundException.class, ()->{
+			servicioService.getServicio(0L);
+		});
+	}
+	
+	@Test
+	void testCreateServicio()
+	{
+		ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+		ServicioEntity result = servicioService.createServicio(newEntity);
+		assertNotNull(result);
 
+		ServicioEntity entity = entityManager.find(ServicioEntity.class, result.getId());
+
+		assertEquals(newEntity.getId(), entity.getId());
+		assertEquals(newEntity.getNombre(), entity.getNombre());
+		
+	}
+	
 }
