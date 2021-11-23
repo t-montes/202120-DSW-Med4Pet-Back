@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "a5d9fc8f-74ca-4a3c-b728-9874cd397acd",
+		"_postman_id": "5523d07c-71ef-4167-becf-5c0d7eb58ddc",
 		"name": "CalificacionTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Obtener todas las calificaciones",
+			"name": "GetAll",
 			"event": [
 				{
 					"listen": "test",
@@ -24,6 +24,84 @@
 			"request": {
 				"method": "GET",
 				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOne",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"No genera error en el Get One\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/calificaciones/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"calificaciones",
+						"{{new_id_a}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"new_id_a\",data.id);\r",
+							"tests[\"No genera error en el Create\"] = responseCode.code === 201;\r",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"creador\":\"wonvd2019\",\r\n    \"puntaje\":4.3,\r\n    \"fecha\":\"1927-03-03T00:00:00-05:00\",\r\n    \"descripcion\":\"un buen veterinario\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/api/calificaciones",
 					"protocol": "http",
