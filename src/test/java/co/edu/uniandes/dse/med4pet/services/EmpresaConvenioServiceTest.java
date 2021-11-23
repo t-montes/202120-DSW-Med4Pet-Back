@@ -98,4 +98,39 @@ class EmpresaConvenioServiceTest {
 		
 	}
 
-}
+	@Test
+	void testCreateEmpresaConvenioWithNullNombre() {
+		assertThrows(IllegalOperationException.class, () -> {
+			EmpresaConvenioEntity newEntity = factory.manufacturePojo(EmpresaConvenioEntity.class);
+			newEntity.setNombre("");
+			empresaConvenioService.createEmpresaConvenio(newEntity);
+		});
+	}
+	
+	@Test
+	void testCreateEmpresaConvenioWithNullNit() {
+		assertThrows(IllegalOperationException.class, () -> {
+			EmpresaConvenioEntity newEntity = factory.manufacturePojo(EmpresaConvenioEntity.class);
+			newEntity.setNit("");
+			empresaConvenioService.createEmpresaConvenio(newEntity);
+		});
+	}
+	
+	@Test
+	void testCreateEmpresaConvenioWithNullServicio() {
+		assertThrows(IllegalOperationException.class, () -> {
+			EmpresaConvenioEntity newEntity = factory.manufacturePojo(EmpresaConvenioEntity.class);
+			newEntity.setServicio("");
+			empresaConvenioService.createEmpresaConvenio(newEntity);
+		});
+	}
+	}
+
+
+
+
+
+
+
+
+

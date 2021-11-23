@@ -90,6 +90,24 @@ class ClienteServiceTest {
 		assertEquals(newEntity.getNombre(), entity.getNombre());
 		assertEquals(newEntity.getCalificacion(), entity.getCalificacion());
 	}
+	
+	@Test
+	void testCreateClienteWithNullNombre() {
+		assertThrows(IllegalOperationException.class, () -> {
+			ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+			newEntity.setNombre("");
+			clienteService.createCliente(newEntity);
+		});
+	}
+
+	@Test
+	void testCreateClienteWithNullCalificacion() {
+		assertThrows(IllegalOperationException.class, () -> {
+			ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+			newEntity.setCalificacion(6.0);
+			clienteService.createCliente(newEntity);
+		});
+	}
 
 
 }
