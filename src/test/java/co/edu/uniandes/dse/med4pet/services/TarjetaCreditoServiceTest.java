@@ -3,6 +3,7 @@ package co.edu.uniandes.dse.med4pet.services;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +16,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.uniandes.dse.med4pet.entities.PSEEntity;
 import co.edu.uniandes.dse.med4pet.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -66,7 +69,7 @@ class TarjetaCreditoServiceTest
 	}
 	
 	@Test
-	void testCreatePSE()
+	void testCreateTarjetaCredito() throws IllegalOperationException, EntityNotFoundException
 	{
 		TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
 		TarjetaCreditoEntity result = tarjetaCreditoService.createTarjetaCredito(newEntity);
@@ -81,7 +84,30 @@ class TarjetaCreditoServiceTest
 	}
 	
 	@Test
-	void testGetPSE() throws EntityNotFoundException
+	public void testCreateTarjetaCreditoWithNoValidNumeroTarjeta()
+	{
+		assertThrows(IllegalOperationException.class, () -> {
+			TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+			newEntity.setNumeroTarjeta(null);
+			newEntity.setFechaVencimiento(Calendar.getInstance().getTime());
+			newEntity.setCodigoSeguridad("aaa");
+			tarjetaCreditoService.createTarjetaCredito(newEntity);
+		});
+	}
+	
+	public void testCreateTarjetaCreditoWithNoValidCodigoSeguridad()
+	{
+		assertThrows(IllegalOperationException.class, () -> {
+			TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+			newEntity.setNumeroTarjeta("asjfakjsdfh");
+			newEntity.setFechaVencimiento(Calendar.getInstance().getTime());
+			newEntity.setCodigoSeguridad(null);
+			tarjetaCreditoService.createTarjetaCredito(newEntity);
+		});
+	}
+	
+	@Test
+	void testGetTarjetaCredito() throws EntityNotFoundException
 	{
 		TarjetaCreditoEntity tarjetaCreditoEntity = tarjetaCreditoList.get(0);
 
@@ -95,7 +121,7 @@ class TarjetaCreditoServiceTest
 	}
 	
 	@Test
-	void testGetInvalidPse() 
+	void testGetInvalidTarjetaCredito() 
 	{
 		assertThrows(EntityNotFoundException.class, ()->{
 			tarjetaCreditoService.getTarjetaCredito(0L);

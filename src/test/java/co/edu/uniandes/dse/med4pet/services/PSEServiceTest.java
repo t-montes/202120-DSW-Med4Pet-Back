@@ -16,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.med4pet.entities.PSEEntity;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -29,26 +30,26 @@ class PSEServiceTest
 
 	@Autowired
 	private PSEService pseService;
-	
+
 	@Autowired 
 	private TestEntityManager entityManager;
-	
+
 	private PodamFactory factory = new PodamFactoryImpl();
-	
+
 	private List<PSEEntity> pseList = new ArrayList<>();
-	
+
 	@BeforeEach
 	void setUp() throws Exception
 	{
 		clearData();
 		insertData();
 	}
-	
+
 	private void clearData()
 	{
 		entityManager.getEntityManager().createQuery("delete from PSEEntity").executeUpdate();
 	}
-	
+
 	private void insertData()
 	{
 		for(int i = 0; i < 3; i++)
@@ -65,9 +66,9 @@ class PSEServiceTest
 		List<PSEEntity> list = pseService.getPSEs();
 		assertEquals(list.size(), pseList.size());
 	}
-	
+
 	@Test
-	void testCreatePSE()
+	void testCreatePSE() throws EntityNotFoundException, IllegalOperationException
 	{
 		PSEEntity newEntity = factory.manufacturePojo(PSEEntity.class);
 		PSEEntity result = pseService.createPSE(newEntity);
@@ -79,7 +80,36 @@ class PSEServiceTest
 		assertEquals(newEntity.getBanco(), entity.getBanco());
 		assertEquals(newEntity.getNumeroTarjeta(), entity.getNumeroTarjeta());
 	}
+
+	/**
+	 * Crea un PSE con un banco inválido
+	 */
+	@Test
+	public void testCreatePSEWithNoValidBanco()
+	{
+		assertThrows(IllegalOperationException.class, () -> {
+			PSEEntity newEntity = factory.manufacturePojo(PSEEntity.class);
+			newEntity.setBanco(null);
+			newEntity.setNumeroTarjeta("1111");
+			pseService.createPSE(newEntity);
+		});
+	}
 	
+	/**
+	 * Crea un PSE con un número de tarjeta inválido
+	 */
+	@Test
+	public void testCreatePSEWithNoValidNumeroTarjeta()
+	{
+		assertThrows(IllegalOperationException.class, () -> {
+			PSEEntity newEntity = factory.manufacturePojo(PSEEntity.class);
+			newEntity.setBanco("Bancolombia");
+			newEntity.setNumeroTarjeta(null);
+			pseService.createPSE(newEntity);
+		});
+	}
+
+
 	@Test
 	void testGetPSE() throws EntityNotFoundException
 	{
@@ -92,7 +122,7 @@ class PSEServiceTest
 		assertEquals(pseEntity.getBanco(), resultEntity.getBanco());
 		assertEquals(pseEntity.getNumeroTarjeta(), resultEntity.getNumeroTarjeta());
 	}
-	
+
 	@Test
 	void testGetInvalidPse() 
 	{

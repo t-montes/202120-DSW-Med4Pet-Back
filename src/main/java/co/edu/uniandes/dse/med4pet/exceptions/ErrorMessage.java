@@ -28,8 +28,11 @@ public final class ErrorMessage {
 	public static final String CONTACTO_NOT_FOUND = "El contacto con el id dado no ha sido encontrado";
 	public static final String AGENDA_NOT_FOUND = "La agenda con el id dado no ha sido encontrada";
 	public static final String CITA_NOT_FOUND = "La cita con el id dado no ha sido encontrada";
+	public static final String PSE_NOT_FOUND = "La cuenta de PSE con el id dado no ha sido encontrada";
+	public final static String TARJETA_NOT_FOUND = "La tarjeta de crédito con el id dado no ha sido encontrada";
 	public static final String CLIENTE_NOT_FOUND = "El cliente con el id dado no ha sido encontrado";
 	public static final String EMPRESACONVENIO_NOT_FOUND = "La Empresa Convenio con el id dado no ha sido encontrada";
+
 	
 	private ErrorMessage() {
 		throw new IllegalStateException("Utility class");

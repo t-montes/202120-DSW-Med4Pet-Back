@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"console.log(responseBody);\r",
-							"var dara = JSON.parse(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
 							"tests[\"No genera error en el get\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -33,6 +33,83 @@
 					"path": [
 						"api",
 						"pses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un PSE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"new_id_a\", data.id);\r",
+							"tests[\"No genera error en el get\"] = responseCode.code === 201;\r",
+							"console.log(data.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"banco\" : \"Bancoolombia\",\r\n    \"numeroTarjeta\" : \"ajdalsd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/pses",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"pses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un PSE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"No genera error en el get one\"] = responseCode === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/api/pses/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"api",
+						"pses",
+						"{{new_id_a}}"
 					]
 				}
 			},
