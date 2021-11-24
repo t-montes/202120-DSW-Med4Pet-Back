@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import co.edu.uniandes.dse.med4pet.entities.PSEEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
+import co.edu.uniandes.dse.med4pet.repositories.ClienteRepository;
 import co.edu.uniandes.dse.med4pet.repositories.PSERepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,12 +38,21 @@ public class PSEService
 			throw new EntityNotFoundException(ErrorMessage.PSE_NOT_FOUND);
 		log.info("Termina el proceso de consultar el PSE con el id = {0}", pseID);
 		return pseEntity.get();
-	}
+	} 
 	
 	// Crear una instancia
 	@Transactional
-	public PSEEntity createPSE(PSEEntity pse)
+	public PSEEntity createPSE(PSEEntity pse) throws IllegalOperationException
 	{
+		log.info("Inicia el proceso de la creación del PSE");
+
+		
+		if(pse.getBanco() == null || pse.getBanco().isEmpty())
+			throw new IllegalOperationException("Banco is not valid");
+		
+		if(pse.getNumeroTarjeta() == null || pse.getNumeroTarjeta().isEmpty())
+			throw new IllegalOperationException("NumeroTarjeta is not valid");
+			
 		return pseRepository.save(pse);
 	}
 }
