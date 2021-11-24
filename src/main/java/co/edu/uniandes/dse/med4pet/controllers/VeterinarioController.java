@@ -57,8 +57,7 @@ public class VeterinarioController {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public VeterinarioDTO create(@RequestBody VeterinarioDTO veterinarioDTO) throws IllegalOperationException {
-		RegistroMedicoDTO registro = veterinarioDTO.getRegistroMedico();
-		VeterinarioEntity veterinarioEntity = veterinarioService.createVeterinario(modelMapper.map(veterinarioDTO, VeterinarioEntity.class),modelMapper.map(registro, RegistroMedicoEntity.class));
+		VeterinarioEntity veterinarioEntity = veterinarioService.createVeterinario(modelMapper.map(veterinarioDTO, VeterinarioEntity.class));
 		return modelMapper.map(veterinarioEntity, VeterinarioDTO.class);
 	}
 	

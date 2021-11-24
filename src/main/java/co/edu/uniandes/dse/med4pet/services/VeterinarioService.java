@@ -35,7 +35,7 @@ public class VeterinarioService {
 	} 
 	
 	@Transactional
-	public VeterinarioEntity createVeterinario(VeterinarioEntity veterinario, RegistroMedicoEntity registro) throws IllegalOperationException {
+	public VeterinarioEntity createVeterinario(VeterinarioEntity veterinario) throws IllegalOperationException {
 		
 		if (veterinario.getCalificacion() > 5 || veterinario.getCalificacion() < 0) {
 			throw new IllegalOperationException("La calificacion inicial de un veterinario no puede ser mayor a 5.0 ni menor a 0");
@@ -48,6 +48,12 @@ public class VeterinarioService {
 		}
 		if (veterinario.getExperienciaPrevia().equals("")) {
 			throw new IllegalOperationException("El veterinario debe tener una experiencia previa");
+		}
+		if (veterinario.getRegistroMedico() == null) {
+			throw new IllegalOperationException("El veterinario debe tener un registro medico");
+		}
+		if (veterinario.getContacto() == null) {
+			throw new IllegalOperationException("El veterinario debe tener un contacto");
 		}
 		return veterinarioRepository.save(veterinario);
 	}
