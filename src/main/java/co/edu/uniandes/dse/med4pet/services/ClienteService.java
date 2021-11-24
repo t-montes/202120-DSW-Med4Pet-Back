@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.uniandes.dse.med4pet.entities.ClienteEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.med4pet.repositories.ClienteRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,4 +36,21 @@ public class ClienteService {
 		log.info("Termina proceso de consultar el cliente con id = {0}", clienteId);
 		return clienteEntity.get();
 	}
+	
+	@Transactional
+	public ClienteEntity createCliente(ClienteEntity cliente) throws IllegalOperationException {
+	    log.info("Inicia proceso de creación del cliente");
+	   
+	    if (cliente.getNombre().equals(""))	{
+	    	throw new IllegalOperationException("El cliente debe tener un nombre");
+	    }  
+	    
+	    if (cliente.getCalificacion() >5 || cliente.getCalificacion() <0) {
+	    	throw new IllegalOperationException ("La calificacion al cliente debe ser mayor a 0 y menor a 5");  
+	    }   	    
+	    
+	    return clienteRepository.save(cliente);
+	   
+	}
+		
 }

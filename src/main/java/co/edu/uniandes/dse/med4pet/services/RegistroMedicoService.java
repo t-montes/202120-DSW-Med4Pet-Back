@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
+import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
+import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.med4pet.repositories.RegistroMedicoRepository;
+import co.edu.uniandes.dse.med4pet.repositories.VeterinarioRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,13 +23,25 @@ public class RegistroMedicoService
 {
 	@Autowired
 	RegistroMedicoRepository registroMedicoRepository;
+	@Autowired
+	VeterinarioRepository veterinarioRepository;
 	
 	@Transactional
 	public List<RegistroMedicoEntity> getRegistrosMedicos()
 	{
 		return registroMedicoRepository.findAll();
 	}
-	
+	@Transactional
+	public RegistroMedicoEntity createRegistroMedico(RegistroMedicoEntity registroMedico) throws IllegalOperationException
+	{
+		log.info("Inicia el proceso de creacion de la calificacion");
+		Optional<VeterinarioEntity> veterinario = veterinarioRepository.findById(registroMedico.getVeterinario().getId());
+		if(veterinario.isEmpty())
+		{
+			throw new IllegalOperationException("El veterinario es invalido");
+		}
+		return registroMedicoRepository.save(registroMedico);
+	}
 	@Transactional
 	public RegistroMedicoEntity getRegistroMedico(Long registroMedicoId) throws EntityNotFoundException {
 		log.info("Inicia proceso de consultar el registroMedico con id = {0}", registroMedicoId);
