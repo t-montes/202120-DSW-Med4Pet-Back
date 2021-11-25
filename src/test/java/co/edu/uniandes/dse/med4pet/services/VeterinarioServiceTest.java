@@ -15,6 +15,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
+import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
 import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
@@ -93,6 +96,10 @@ class VeterinarioServiceTest {
 	void testCreateVeterinario() throws IllegalOperationException
 	{
 		VeterinarioEntity newEntity = factory.manufacturePojo(VeterinarioEntity.class);
+		RegistroMedicoEntity re = factory.manufacturePojo(RegistroMedicoEntity.class);
+		ContactoEntity co = factory.manufacturePojo(ContactoEntity.class);
+		newEntity.setContacto(co);
+		newEntity.setRegistroMedico(re);
 		VeterinarioEntity result = veterinarioService.createVeterinario(newEntity);
 		assertNotNull(result);
 		

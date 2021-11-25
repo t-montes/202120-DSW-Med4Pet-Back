@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.uniandes.dse.med4pet.dto.ContactoDTO;
 import co.edu.uniandes.dse.med4pet.dto.RegistroMedicoDTO;
 import co.edu.uniandes.dse.med4pet.dto.VeterinarioDTO;
 import co.edu.uniandes.dse.med4pet.dto.VeterinarioDetailDTO;
+import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
 import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
 import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
