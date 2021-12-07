@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.uniandes.dse.med4pet.entities.CalificacionEntity;
-import co.edu.uniandes.dse.med4pet.entities.ClienteEntity;
-import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;

@@ -44,6 +44,7 @@ public class CalificacionController
     	CalificacionEntity calificacionEntity = calificacionService.getCalificacion(id);
 		return modelMapper.map(calificacionEntity, CalificacionDTO.class);
 	}
+	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public CalificacionDTO create(@RequestBody CalificacionDTO calificacionDTO) throws EntityNotFoundException, co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException {
