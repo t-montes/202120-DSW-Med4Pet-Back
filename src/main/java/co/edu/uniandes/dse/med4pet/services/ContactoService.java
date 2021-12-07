@@ -12,7 +12,6 @@ import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.med4pet.repositories.ClienteRepository;
 import co.edu.uniandes.dse.med4pet.repositories.ContactoRepository;
 
 @Service

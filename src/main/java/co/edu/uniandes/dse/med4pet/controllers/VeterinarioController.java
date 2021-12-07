@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.uniandes.dse.med4pet.dto.ContactoDTO;
-import co.edu.uniandes.dse.med4pet.dto.RegistroMedicoDTO;
+import co.edu.uniandes.dse.med4pet.dto.AgendaDTO;
+import co.edu.uniandes.dse.med4pet.dto.CalificacionDTO;
 import co.edu.uniandes.dse.med4pet.dto.VeterinarioDTO;
 import co.edu.uniandes.dse.med4pet.dto.VeterinarioDetailDTO;
-import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
-import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
+import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
+import co.edu.uniandes.dse.med4pet.entities.CalificacionEntity;
 import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
@@ -63,6 +63,20 @@ public class VeterinarioController {
 		return modelMapper.map(veterinarioEntity, VeterinarioDTO.class);
 	}
 	
+	@PostMapping(value = "/{veterinarioId}/calificaciones/{calificacionId}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public CalificacionDTO addCalificacion(@PathVariable("veterinarioId") Long veterinarioId, 
+			@PathVariable("calificacionId") Long calificacionId) throws EntityNotFoundException {
+		CalificacionEntity calificacionEntity = veterinarioService.addCalificacion(veterinarioId, calificacionId);
+		return modelMapper.map(calificacionEntity, CalificacionDTO.class);
+	}
 	
+	@PostMapping(value = "/{veterinarioId}/agendas/{agendaId}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public AgendaDTO addAgenda(@PathVariable("veterinarioId") Long veterinarioId, 
+			@PathVariable("agendaId") Long agendaId) throws EntityNotFoundException {
+		AgendaEntity agendaEntity = veterinarioService.addAgenda(veterinarioId, agendaId);
+		return modelMapper.map(agendaEntity, AgendaDTO.class);
+	}
 	
 }

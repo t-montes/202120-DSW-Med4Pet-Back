@@ -1,11 +1,9 @@
 package co.edu.uniandes.dse.med4pet.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import java.util.Optional;
 
-import org.apache.tomcat.jni.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
