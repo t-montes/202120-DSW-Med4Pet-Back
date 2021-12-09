@@ -59,7 +59,7 @@ public class CitaService {
 			throw new IllegalOperationException("La hora de inicio de la cita debe estar entre las 6am y las 8pm");
 		}
 		//La cita debe terminar antes de las 9pm
-		if (cita.getFecha().getHour()+Math.floor(cita.getDuracion()/60) > 21) {
+		if (cita.getFecha().getHour()+Math.floor(((double) cita.getDuracion())/60) > 21) {
 			throw new IllegalOperationException("La hora de finalización de la cita debe ser máximo a las 9pm");
 		}
 		//La cita no puede ser un domingo
