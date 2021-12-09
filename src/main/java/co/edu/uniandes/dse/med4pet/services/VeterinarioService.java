@@ -85,6 +85,12 @@ public class VeterinarioService {
 		if (veterinarioEntity.isEmpty())
 			throw new EntityNotFoundException(ErrorMessage.VETERINARIO_NOT_FOUND);
 		
+	    double sum = calificacionEntity.get().getPuntaje();
+	    for (CalificacionEntity cal : veterinarioEntity.get().getCalificaciones()) {
+	        sum += cal.getPuntaje();
+	    }
+	    veterinarioEntity.get().setCalificacion(sum/(veterinarioEntity.get().getCalificaciones().size()+1));
+		
 		calificacionEntity.get().setVeterinarioCalificado(veterinarioEntity.get());
 		log.info(String.format("Termina proceso de agregarle una calificacion a un veterinario con id = %d",veterinarioId));
 		return calificacionEntity.get();

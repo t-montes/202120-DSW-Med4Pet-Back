@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.med4pet.services.EmpresaConvenioService;
+import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
 import co.edu.uniandes.dse.med4pet.entities.EmpresaConvenioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
+import co.edu.uniandes.dse.med4pet.dto.ContactoDTO;
 import co.edu.uniandes.dse.med4pet.dto.EmpresaConvenioDTO;
 
 @RestController
@@ -50,4 +52,13 @@ public class EmpresaConvenioController {
 		EmpresaConvenioEntity empresaConvenioEntity = empresaConvenioService.createEmpresaConvenio(modelMapper.map(empresaConvenioDTO, EmpresaConvenioEntity.class));
 		return modelMapper.map(empresaConvenioEntity, EmpresaConvenioDTO.class);
 	}
+	
+	@PostMapping(value = "/{empresaConvenioId}/contactos/{contactoId}")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public ContactoDTO addContacto(@PathVariable("empresaConvenioId") Long empresaConvenioId, 
+			@PathVariable("contactoId") Long contactoId) throws EntityNotFoundException {
+		ContactoEntity contactoEntity = empresaConvenioService.addContacto(empresaConvenioId, contactoId);
+		return modelMapper.map(contactoEntity, ContactoDTO.class);
+	}
+	
 }

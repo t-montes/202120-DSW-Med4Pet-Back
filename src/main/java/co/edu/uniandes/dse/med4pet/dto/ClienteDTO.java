@@ -29,5 +29,7 @@ public class ClienteDTO {
 	//===========================================================================
 	
 	private MedioDePagoDTO medioDePagoPredeterminado;
+	
+	private ContactoDTO contacto;
 
 }

@@ -38,6 +38,6 @@ public class EmpresaConvenioEntity extends BaseEntity {
 	 * Representa con contacto con el que se puede comunicar con la empresa.
 	 */	
 	@PodamExclude
-	@OneToOne
+	@OneToOne(mappedBy ="empresaConvenio")
 	private ContactoEntity contacto;
 }

@@ -44,7 +44,7 @@ public class EmpresaConvenioService {
 	
 	@Transactional
 	public EmpresaConvenioEntity createEmpresaConvenio (EmpresaConvenioEntity empresaConvenio) throws IllegalOperationException {
-	    log.info("Inicia proceso de creación del EmpresaConvenio");
+	    log.info("Inicia proceso de creación de la EmpresaConvenio");
 	    
 	    if (empresaConvenio.getNombre().equals(""))	{
 	    	throw new IllegalOperationException("La empresa Convenio debe tener un nombre");
@@ -56,7 +56,7 @@ public class EmpresaConvenioService {
 	    
 	    if (empresaConvenio.getServicio().equals(""))	{
 	    	throw new IllegalOperationException("La empresa Convenio debe tener un servicio");
-	    }  
+	    }
 	    return empresaConvenioRepository.save(empresaConvenio);
 	}
 	

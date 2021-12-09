@@ -79,6 +79,13 @@ public class ClienteService {
 		if (clienteEntity.isEmpty())
 			throw new EntityNotFoundException(ErrorMessage.CLIENTE_NOT_FOUND);
 		
+	    double sum = calificacionEntity.get().getPuntaje();
+	    for (CalificacionEntity cal : clienteEntity.get().getCalificaciones()) {
+	        sum += cal.getPuntaje();
+	    }
+	    log.info(sum/(clienteEntity.get().getCalificaciones().size()+1)+"");
+	    clienteEntity.get().setCalificacion(sum/(clienteEntity.get().getCalificaciones().size()+1));
+		
 		calificacionEntity.get().setClienteCalificado(clienteEntity.get());
 		log.info(String.format("Termina proceso de agregarle una calificacion a un cliente con id = %d",clienteId));
 		return calificacionEntity.get();

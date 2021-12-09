@@ -39,7 +39,7 @@ public class ClienteEntity extends BaseEntity {
 	 */	
 
 	@PodamExclude
-	@OneToOne
+	@OneToOne(mappedBy ="cliente")
 	private ContactoEntity contacto;
 	
 	/**

@@ -39,9 +39,9 @@ public class ClienteController {
 	
 	@GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ClienteDTO> findAll() {
+    public List<ClienteDetailDTO> findAll() {
             List<ClienteEntity> clientes = clienteService.getClientes();
-            return modelMapper.map(clientes, new TypeToken<List<ClienteDTO>>() {
+            return modelMapper.map(clientes, new TypeToken<List<ClienteDetailDTO>>() {
             }.getType());
     }
     
