@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
+import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.med4pet.services.AgendaService;
 import co.edu.uniandes.dse.med4pet.dto.AgendaDetailDTO;
+import co.edu.uniandes.dse.med4pet.dto.CitaDTO;
 
 @RestController
 @RequestMapping("/agendas")
@@ -50,5 +52,13 @@ public class AgendaController {
 	public AgendaDetailDTO create(@RequestBody AgendaDetailDTO agendaDTO) throws IllegalOperationException {
 		AgendaEntity agendaEntity = agendaService.createAgenda(modelMapper.map(agendaDTO, AgendaEntity.class));
 		return modelMapper.map(agendaEntity, AgendaDetailDTO.class);
+	}
+
+	@PostMapping(value = "/{agendaId}/citas/{citaId}")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public CitaDTO addCita(@PathVariable("agendaId") Long agendaId, 
+			@PathVariable("citaId") Long citaId) throws EntityNotFoundException {
+		CitaEntity citaEntity = agendaService.addCita(agendaId, citaId);
+		return modelMapper.map(citaEntity, CitaDTO.class);
 	}
 }

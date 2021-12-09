@@ -35,11 +35,6 @@ public class RegistroMedicoService
 	public RegistroMedicoEntity createRegistroMedico(RegistroMedicoEntity registroMedico) throws IllegalOperationException
 	{
 		log.info("Inicia el proceso de creacion de la calificacion");
-		Optional<VeterinarioEntity> veterinario = veterinarioRepository.findById(registroMedico.getVeterinario().getId());
-		if(veterinario.isEmpty())
-		{
-			throw new IllegalOperationException("El veterinario es invalido");
-		}
 		return registroMedicoRepository.save(registroMedico);
 	}
 	@Transactional

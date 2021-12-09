@@ -102,15 +102,4 @@ class RegistroMedicoServiceTest
 		assertEquals(registro.getIdentificacion(),result.getIdentificacion());
 		assertEquals(registro.getImagen(),result.getImagen());
 	}
-	@Test
-	void TestCreateRegistroMedicoInvalidVeterinario()
-	{
-		assertThrows(IllegalOperationException.class, () -> {
-			RegistroMedicoEntity newEntity = factory.manufacturePojo(RegistroMedicoEntity.class);
-			VeterinarioEntity veterinario = new VeterinarioEntity();
-			veterinario.setId(0L);
-			newEntity.setVeterinario(veterinario);
-			registroMedicoService.createRegistroMedico(newEntity);
-		});
-	}
 }

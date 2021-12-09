@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
+import co.edu.uniandes.dse.med4pet.entities.CitaEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.med4pet.repositories.AgendaRepository;
+import co.edu.uniandes.dse.med4pet.repositories.CitaRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,6 +22,9 @@ public class AgendaService {
 
 	@Autowired
 	AgendaRepository agendaRepository;
+
+	@Autowired
+	CitaRepository citaRepository;
 	
 	/**
 	 * Obtener la lista de todas las agendas
@@ -53,5 +58,21 @@ public class AgendaService {
 		}
 		
 		return agendaRepository.save(agenda);
+	}
+	
+	@Transactional
+	public CitaEntity addCita(Long agendaId, Long citaId) throws EntityNotFoundException {
+		log.info(String.format("Inicia proceso de agregarle una cita a una agenda con id = %d",agendaId));
+		Optional<CitaEntity> citaEntity = citaRepository.findById(citaId);
+		if (citaEntity.isEmpty())
+			throw new EntityNotFoundException(ErrorMessage.CITA_NOT_FOUND);
+		
+		Optional<AgendaEntity> agendaEntity = agendaRepository.findById(agendaId);
+		if (agendaEntity.isEmpty())
+			throw new EntityNotFoundException(ErrorMessage.AGENDA_NOT_FOUND);
+		
+		citaEntity.get().setAgenda(agendaEntity.get());
+		log.info(String.format("Inicia proceso de agregarle una cita a una agenda con id = %d",agendaId));
+		return citaEntity.get();
 	}
 }
