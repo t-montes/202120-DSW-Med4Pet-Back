@@ -23,6 +23,11 @@ public class ClienteDTO {
 	 * Representa la calificacion dada al cliente.
 	 */
 	private Double calificacion;
-		
+
+	//===========================================================================
+	// Asociaciones
+	//===========================================================================
+	
+	private MedioDePagoDTO medioDePagoPredeterminado;
 
 }
