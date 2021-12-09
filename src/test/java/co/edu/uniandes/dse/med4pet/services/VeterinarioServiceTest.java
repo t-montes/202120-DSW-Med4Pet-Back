@@ -112,19 +112,7 @@ class VeterinarioServiceTest {
 		assertEquals(newEntity.getExperienciaPrevia(), entity.getExperienciaPrevia());
 		assertEquals(newEntity.getCertificadoEntrenamiento(), entity.getCertificadoEntrenamiento());
 	}
-	
-	@Test
-	void testCreateVeterinarioWithWrongCalification() {
-		VeterinarioEntity newEntity = factory.manufacturePojo(VeterinarioEntity.class);
-		assertThrows(IllegalOperationException.class, ()-> {
-			newEntity.setCalificacion(6.0);
-			veterinarioService.createVeterinario(newEntity);
-		});
-		assertThrows(IllegalOperationException.class, ()-> {
-			newEntity.setCalificacion(-1.0);
-			veterinarioService.createVeterinario(newEntity);
-		});
-	}
+
 	
 	@Test 
 	void testCreateVeterinarioWithWrongNombre() {

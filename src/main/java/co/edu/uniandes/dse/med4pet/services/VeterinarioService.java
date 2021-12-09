@@ -47,9 +47,6 @@ public class VeterinarioService {
 	
 	@Transactional
 	public VeterinarioEntity createVeterinario(VeterinarioEntity veterinario) throws IllegalOperationException {
-		if (veterinario.getCalificacion() > 5 || veterinario.getCalificacion() < 0) {
-			throw new IllegalOperationException("La calificacion inicial de un veterinario no puede ser mayor a 5.0 ni menor a 0");
-		}
 		if (veterinario.getEspecialidad().equals("")) {
 			throw new IllegalOperationException("El veterinario debe tener una especialidad");
 		}

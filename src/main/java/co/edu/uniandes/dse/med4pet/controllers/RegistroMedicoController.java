@@ -46,6 +46,7 @@ public class RegistroMedicoController
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public RegistroMedicoDTO create(@RequestBody RegistroMedicoDTO registroMedicoDTO) throws EntityNotFoundException, co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException {
+		System.out.println("hola------------------");
 		RegistroMedicoEntity registroMedicoEntity = registroMedicoService.createRegistroMedico(modelMapper.map(registroMedicoDTO, RegistroMedicoEntity.class));
 		return modelMapper.map(registroMedicoEntity, RegistroMedicoDTO.class);
 	}
