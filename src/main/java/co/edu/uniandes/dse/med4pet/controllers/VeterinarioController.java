@@ -16,10 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.med4pet.dto.AgendaDTO;
 import co.edu.uniandes.dse.med4pet.dto.CalificacionDTO;
+import co.edu.uniandes.dse.med4pet.dto.ContactoDTO;
+import co.edu.uniandes.dse.med4pet.dto.RegistroMedicoDTO;
+import co.edu.uniandes.dse.med4pet.dto.ServicioDTO;
 import co.edu.uniandes.dse.med4pet.dto.VeterinarioDTO;
 import co.edu.uniandes.dse.med4pet.dto.VeterinarioDetailDTO;
 import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
 import co.edu.uniandes.dse.med4pet.entities.CalificacionEntity;
+import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
+import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
+import co.edu.uniandes.dse.med4pet.entities.ServicioEntity;
 import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
@@ -79,4 +85,28 @@ public class VeterinarioController {
 		return modelMapper.map(agendaEntity, AgendaDTO.class);
 	}
 	
+	@PostMapping(value = "/{veterinarioId}/registrosMedicos/{registroMedicoId}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public RegistroMedicoDTO addRegistroMedico(@PathVariable("veterinarioId") Long veterinarioId,
+			@PathVariable("registroMedicoId") Long registroMedicoId) throws EntityNotFoundException {
+		RegistroMedicoEntity registroMedicoEntity = veterinarioService.addRegistroMedico(veterinarioId, 
+				registroMedicoId);
+		return modelMapper.map(registroMedicoEntity, RegistroMedicoDTO.class);
+	}
+	
+	@PostMapping(value = "/{veterinarioId}/contactos/{contactoId}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public ContactoDTO addContacto(@PathVariable("veterinarioId") Long veterinarioId,
+			@PathVariable("contactoId") Long contactoId) throws EntityNotFoundException {
+		ContactoEntity contactoEntity = veterinarioService.addContacto(veterinarioId,contactoId);
+		return modelMapper.map(contactoEntity, ContactoDTO.class);
+	}
+	
+	@PostMapping(value = "/{veterinarioId}/servicios/{servicioId}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public ServicioDTO addServicio(@PathVariable("veterinarioId") Long veterinarioId,
+			@PathVariable("servicioId") Long servicioId) throws EntityNotFoundException {
+		ServicioEntity servicioEntity = veterinarioService.addServicio(veterinarioId,servicioId);
+		return modelMapper.map(servicioEntity, ServicioDTO.class);
+	}
 }

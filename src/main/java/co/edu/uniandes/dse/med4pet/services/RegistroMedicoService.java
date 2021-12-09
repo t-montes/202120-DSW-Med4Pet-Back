@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
-import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;

@@ -10,12 +10,18 @@ import org.springframework.stereotype.Service;
 
 import co.edu.uniandes.dse.med4pet.entities.AgendaEntity;
 import co.edu.uniandes.dse.med4pet.entities.CalificacionEntity;
+import co.edu.uniandes.dse.med4pet.entities.ContactoEntity;
+import co.edu.uniandes.dse.med4pet.entities.RegistroMedicoEntity;
+import co.edu.uniandes.dse.med4pet.entities.ServicioEntity;
 import co.edu.uniandes.dse.med4pet.entities.VeterinarioEntity;
 import co.edu.uniandes.dse.med4pet.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.med4pet.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.med4pet.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.med4pet.repositories.AgendaRepository;
 import co.edu.uniandes.dse.med4pet.repositories.CalificacionRepository;
+import co.edu.uniandes.dse.med4pet.repositories.ContactoRepository;
+import co.edu.uniandes.dse.med4pet.repositories.RegistroMedicoRepository;
+import co.edu.uniandes.dse.med4pet.repositories.ServicioRepository;
 import co.edu.uniandes.dse.med4pet.repositories.VeterinarioRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +37,15 @@ public class VeterinarioService {
 
 	@Autowired
 	private AgendaRepository agendaRepository;
+
+	@Autowired
+	private RegistroMedicoRepository registroMedicoRepository;
+
+	@Autowired
+	private ContactoRepository contactoRepository;
+
+	@Autowired
+	private ServicioRepository servicioRepository;
 	
 	@Transactional
 	public List<VeterinarioEntity> getVeterinarios(){
@@ -90,4 +105,53 @@ public class VeterinarioService {
 		log.info(String.format("Termina proceso de agregarle una agenda a un veterinario con id = %d",veterinarioId));
 		return agendaEntity.get();
 	}
+	
+	@Transactional
+	public RegistroMedicoEntity addRegistroMedico(Long veterinarioId, Long registroMedicoId) throws EntityNotFoundException {
+		log.info(String.format("Inicia proceso de agregarle un registro médico a un veterinario con id = %d",veterinarioId));
+		Optional<RegistroMedicoEntity> registroMedicoEntity = registroMedicoRepository.findById(registroMedicoId);
+		if (registroMedicoEntity.isEmpty())
+			throw new EntityNotFoundException(ErrorMessage.REGISTROMEDICO_NOT_FOUND);
+		
+		Optional<VeterinarioEntity> veterinarioEntity = veterinarioRepository.findById(veterinarioId);
+		if (veterinarioEntity.isEmpty())
+			throw new EntityNotFoundException(ErrorMessage.VETERINARIO_NOT_FOUND);
+		
+		registroMedicoEntity.get().setVeterinario(veterinarioEntity.get());
+		log.info(String.format("Termina proceso de agregarle un registro médico a un veterinario con id = %d",veterinarioId));
+		return registroMedicoEntity.get();
+	}
+
+	@Transactional
+	public ContactoEntity addContacto(Long veterinarioId, Long contactoId) throws EntityNotFoundException {
+		log.info(String.format("Inicia proceso de agregarle un contacto a un veterinario con id = %d",veterinarioId));
+		Optional<ContactoEntity> contactoEntity = contactoRepository.findById(contactoId);
+		if (contactoEntity.isEmpty())
+			throw new EntityNotFoundException(ErrorMessage.CONTACTO_NOT_FOUND);
+		
+		Optional<VeterinarioEntity> veterinarioEntity = veterinarioRepository.findById(veterinarioId);
+		if (veterinarioEntity.isEmpty())
+			throw new EntityNotFoundException(ErrorMessage.VETERINARIO_NOT_FOUND);
+		
+		contactoEntity.get().setVeterinario(veterinarioEntity.get());
+		log.info(String.format("Termina proceso de agregarle un contacto a un veterinario con id = %d",veterinarioId));
+		return contactoEntity.get();
+	}
+	
+	@Transactional
+	public ServicioEntity addServicio(Long veterinarioId, Long servicioId) throws EntityNotFoundException {
+		log.info(String.format("Inicia proceso de agregarle un servicio médico a un veterinario con id = %d",veterinarioId));
+		Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioId);
+		if (servicioEntity.isEmpty())
+			throw new EntityNotFoundException(ErrorMessage.SERVICIO_NOT_FOUND);
+		
+		Optional<VeterinarioEntity> veterinarioEntity = veterinarioRepository.findById(veterinarioId);
+		if (veterinarioEntity.isEmpty())
+			throw new EntityNotFoundException(ErrorMessage.VETERINARIO_NOT_FOUND);
+		
+		servicioEntity.get().getPrestadores().add(veterinarioEntity.get());
+		log.info(String.format("Termina proceso de agregarle un servicio a un veterinario con id = %d",veterinarioId));
+		return servicioEntity.get();
+	}
+	
 }
