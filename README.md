@@ -2,7 +2,7 @@
 
 ## Med4Pet Backend
 
-*Date of realization: December/2021*
+*Realization Date: December/2021*
 
 Members [Metateoremas]:
 
